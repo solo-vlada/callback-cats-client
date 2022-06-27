@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./static/css/dashboard.css">
+    <script defer src="./static/dashboard.js"></script>
     <title>Dashboard</title>
 </head>
 <body>
@@ -22,12 +23,20 @@
             <div class="habbit-icon">habbit 5</div>
             <div class="habbit-icon">habbit 6</div>
         </div>
+        <div class="completed-trackers habbit-icon-container">
+            <div class="habbit-icon">old habbit 1</div>
+            <div class="habbit-icon">old habbit 2</div>
+            <div class="habbit-icon">old habbit 3</div>
+            <div class="habbit-icon">old habbit 4</div>
+            <div class="habbit-icon">old habbit 5</div>
+            <div class="habbit-icon">oldhabbit 6</div>
+        </div>
         <div class="stats-container">
             <button class="stats-button btn">Stats</button>
                 <div class="stats-board">
                     <ul class="stats">
-                        <li class="streak-statistic">4 streaks</li>
-                        <li class="completion-statistic">70%</li>
+                        <li class="streak-statistics"><p >Streaks:</p><div class="streaks-count"><p>4</p></div></li>
+                        <li class="completion-statistics"><p >Completeion:</p> <div class="completion-progress-bar"></div></li>
                     </ul>
                         <div class="chart-statistics"></div>    
                         <div class="calendar-statistics"></div>        

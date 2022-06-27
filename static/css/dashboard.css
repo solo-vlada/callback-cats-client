@@ -48,8 +48,8 @@ body{
     color: white;
 }
 
-.swap-button{
-}
+/* .swap-button{
+} */
 
 .stats-button{
 background-color:white;
@@ -64,6 +64,11 @@ color: black;
     width:100%;
     flex-wrap: wrap;
     transition: 0.4s;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    opacity: 1;
+    
 }
 .habbit-icon{
     border: solid black 1px;
@@ -92,10 +97,41 @@ color: black;
     margin-right: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: flex-start;
 }
-
+.stats-board{
+    width: 80%;
+    margin: 2rem auto;
+}
+.text-align-left{
+    width: 100%;
+    text-align: left;
+    border: solid white 1px;
+}
+.streak-statistics{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    justify-content: space-between;
+}
+.completion-statistics{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+padding: 10px;
+}
+.completion-progress-bar{
+    border: white solid 1px;
+    border-radius: 4px;
+    height: 20px;
+    width: 65%;
+    }
+.completed-trackers{
+    display: flex;
+    position: absolute;
+    top: 10rem;
+}
 
 @media only screen and (min-width:768px){
     .btn{
@@ -108,4 +144,32 @@ color: black;
         width: 250px;
         margin: 20px;
     }
+    .stats-board{
+        width: 400px;
+        background: white;
+        color: black;
+        border-radius: 4px;
+        padding: 10px;
+    }
+    .completion-progress-bar{
+        background: white;
+        border: solid black 1px;
+    }
+        .completed-trackers {
+            display: flex;
+            position: absolute;
+            top:12rem;
+        }
+}
+
+
+@keyframes slide-in{
+    from{
+        opacity: 0;
+        margin-left: 175vw;}
+}
+@keyframes slide-out{
+    to{
+        opacity: 0;
+        margin-left: -175vw;}
 }
