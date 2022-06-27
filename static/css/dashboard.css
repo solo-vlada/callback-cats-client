@@ -13,7 +13,12 @@ body{
     overflow-x: hidden;
 }
 
+.swap-button{
+animation-duration: 0.2s;
+animation-fill-mode: forwards;
+animation-timing-function: linear;
 
+}
 .welcome-message{
     display: none;
 }
@@ -48,8 +53,9 @@ body{
     color: white;
 }
 
-/* .swap-button{
-} */
+ .swap-button{
+            overflow: hidden;
+} 
 
 .stats-button{
 background-color:white;
@@ -71,7 +77,6 @@ color: black;
     
 }
 .habbit-icon{
-    border: solid black 1px;
     height: 120px;
     width: 120px;
     border-radius: 50%;
@@ -82,8 +87,8 @@ color: black;
     cursor: pointer;
     transition: 0.4s;
     user-select: none;
-    background: black;
-    color: white;
+    background-image:radial-gradient(white 50%,rgb(225, 224, 224));
+    color: black;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.437);
 }
 
@@ -173,3 +178,15 @@ padding: 10px;
         opacity: 0;
         margin-left: -175vw;}
 }
+@keyframes spin {
+    50% {
+           background-color: white;
+           color: white;
+        }
+}
+
+@keyframes unspin {
+    50% {
+        background-color: white;
+            color: white;
+        }}

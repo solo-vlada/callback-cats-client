@@ -11,9 +11,12 @@ switchBtn.addEventListener("click", (e) => {
     iconContainer.style.animationName = "slide-in";
     completedTrackers.style.animationName = "slide-out";
     switchBtn.textContent = "View in-progress";
+    switchBtn.style.animationName = "spin";
   } else {
     iconContainer.style.animationName = "slide-out";
     completedTrackers.style.animationName = "slide-in";
+    switchBtn.textContent = "View Completed";
+    switchBtn.style.animationName = "unspin";
   }
 });
 
