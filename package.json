@@ -1,0 +1,20 @@
+{
+  "name": "callback-cats-client",
+  "version": "1.0.0",
+  "description": "CHANGELOG * Created a file structure for FD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solo-vlada/callback-cats-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/solo-vlada/callback-cats-client/issues"
+  },
+  "homepage": "https://github.com/solo-vlada/callback-cats-client#readme"
+}

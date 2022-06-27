@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+/* 
+ ::-webkit-scrollbar{ 
+display: none;
+}  */
+
+body{
+    overflow-x: hidden;
+}
+
+
+.welcome-message{
+    display: none;
+}
+
+.dashboard-container{
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+
+.btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 4rem auto;
+}
+.btn{
+    width: 120px;
+    padding: 8px;
+    font-size: 10pt;
+    border: none;
+    border-radius: 3px;
+    background: black;
+    color: white;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.429);
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn:hover{
+    background: rgb(52, 52, 52);
+    color: white;
+}
+
+.swap-button{
+}
+
+.stats-button{
+background-color:white;
+color: black;
+}
+
+.habbit-icon-container{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    width:100%;
+    flex-wrap: wrap;
+    transition: 0.4s;
+}
+.habbit-icon{
+    border: solid black 1px;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    margin:10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.4s;
+    user-select: none;
+    background: black;
+    color: white;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.437);
+}
+
+.stats-container{
+    height: 500px;
+    margin-top: 6rem;
+    background-color: black;
+    color: white;
+    width: 94%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+
+@media only screen and (min-width:768px){
+    .btn{
+        padding: 20px;
+        width: 200px;
+        font-size: 16pt;
+    }
+    .habbit-icon{
+        height: 250px;
+        width: 250px;
+        margin: 20px;
+    }
+}
