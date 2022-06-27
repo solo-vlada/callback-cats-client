@@ -1,21 +1,48 @@
-const navLinks = document.querySelectorAll("a.navLink");
+const nav = document.querySelector("nav");
 const main = document.querySelector("main");
+
+const publicRoutes = ['#', '#login', '#register'];
+const privateRoutes = ['#habitForm', '#dashboard'];
 
 window.addEventListener('hashchange', updateContent);
 
-function updateNav(hash) {
-    const updateLink = link => {
-        link.classList = (link.textContent == '+' && hash.includes('new') || hash.includes(link.textContent)) ? ['navLink', 'current'] : ['navLink']
+function updateNav() {
+    nav.innerHTML = '';
+    let links; 
+    let logoutBtn;
+    links = publicRoutes.map(createNavLink);
+    // if(currentUser()){
+    //     links = privateRoutes.map(createNavLink);
+    //     logoutBtn = document.createElement('button');
+    //     logoutBtn.textContent = 'Logout';
+    //     logoutBtn.onclick = logout;
+    //     nav.appendChild(logoutBtn);
+    // } else {
+    //     links = publicRoutes.map(createNavLink);
+    // }
+        links.forEach(l => nav.insertBefore(l, logoutBtn));
     };
 
-    navLinks.forEach(updateLink);
-}
-
-function updateMain(hash) {
+function updateMain(path) {
     main.innerHTML = '';
-    if(hash) {
-        let [category, id] = hash.split('/');
-        id ? loadModalFor(category,id) : loadIndexFor(category)
+    if(path) {
+        switch(path) {
+            case '#login':
+                renderLoginForm();
+                break;
+            case '#register':
+                renderRegisterForm();
+                break;
+            case '#habitForm':
+                renderHabitForm();
+                break;
+            case '#dashboard':
+                renderDashboard();
+                break;
+            default:
+                render404();
+                break;
+        }
     } else {
         main.innerHTML += `
             <h1 class="title">Develop good habits!</h1>
@@ -25,8 +52,24 @@ function updateMain(hash) {
         }
     }
 
-function updateContent() {
-    let hash = window.location.hash.substring(1);
-    updateNav(hash);
-    updateMain(hash);
+function createNavLink(route) {
+    const link = document.createElement('a');
+    link.textContent = route ==='#' ? 'Home' : `${route[1].toUpperCase()}${route.substring(2)}`; 
+    link.href = route;
+    return link;
 }
+
+
+function updateContent() {
+    const path = window.location.hash;
+    updateNav();
+    updateMain(path);
+//     if (privateRoutes.includes(path) && !currentUser()){
+//         window.location.hash = '#';
+//     } else {
+//     updateNav();
+//     updateMain(path);
+// }
+}
+
+updateContent();

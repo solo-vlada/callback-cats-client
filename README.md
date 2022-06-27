@@ -3,4 +3,6 @@ CHANGELOG
 * Added basic html structure in index.html
 
 In static => js => layout.js
-* Added function to update nav styling 
+* Added updateNav function to create nav bar 
+* Added updateMain function to populate pages using js
+
