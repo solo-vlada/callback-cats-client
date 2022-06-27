@@ -1,5 +1,4 @@
 const nav = document.querySelector("nav");
-const main = document.querySelector("main");
 
 const publicRoutes = ['#', '#login', '#register'];
 const privateRoutes = ['#habitForm', '#dashboard'];
@@ -11,6 +10,7 @@ function updateNav() {
     let links; 
     let logoutBtn;
     links = publicRoutes.map(createNavLink);
+    privateLinks = privateRoutes.map(createNavLink);
     // if(currentUser()){
     //     links = privateRoutes.map(createNavLink);
     //     logoutBtn = document.createElement('button');
@@ -21,7 +21,9 @@ function updateNav() {
     //     links = publicRoutes.map(createNavLink);
     // }
         links.forEach(l => nav.insertBefore(l, logoutBtn));
+        privateLinks.forEach(l=> nav.insertBefore(l, logoutBtn));
     };
+
 
 function updateMain(path) {
     main.innerHTML = '';
@@ -35,12 +37,13 @@ function updateMain(path) {
                 break;
             case '#habitForm':
                 renderHabitForm();
+                renderFrequencyForm();
                 break;
             case '#dashboard':
                 renderDashboard();
                 break;
             default:
-                render404();
+                render404()
                 break;
         }
     } else {
