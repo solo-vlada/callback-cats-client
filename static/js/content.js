@@ -1,24 +1,6 @@
-//REMOVE CODE BELOW
-// const modal = document.querySelector('#modal');
-// const modalHeader = document.querySelector('h2');
-// const modalExit = modal.querySeelctor('i a');
-// const modalContent = document.querySelector('article');
-
-
-// //Loads an appripriate page based on its url path 
-// async function loadForms(category, id) {
-//     modalContent.innerHTML = '';
-//     modal.style.display = 'block';
-//     if(id === 'new') {
-//         renderRegistrationForm();
-//     }
-//     //  else {
-//     //     const data = await getItem(category, id);
-//     //     category === 'login' ? renderLoginForm() : renderHabitForm();
-//     // }
-    
-// }
-//REMOVE CODE ABOVE 
+const main = document.querySelector("main");
+const header = document.createElement('h2');
+const header2 = document.createElement('h2');
 
 function renderLoginForm() {
     const fields =  [
@@ -26,13 +8,15 @@ function renderLoginForm() {
         {tag:'input', attributes: { type:'password', name:'password', placeholder:'Email' }},
         {tag:'input', attributes: { type:'submit', value:'Login'}},
     ];
+    header.textContent = "Login";
     const form = document.createElement('form');
     fields.forEach(f => {
         const field = document.createElement(f.tag);
         Object.entries(f.attributes).forEach(([a,v]) => field.setAttribute(a,v))
         form.appendChild(field);
     })
- //   form.addEventListener('submit', requestLogin)
+    //form.addEventListener('submit', requestLogin)
+    main.appendChild(header);
     main.appendChild(form);
 }
 
@@ -45,22 +29,80 @@ function renderRegisterForm() {
         {tag:'input', attributes: { type:'submit', value:'Create Account'}},
     ];
 
-    // modalHeader.textContent = "Register";
+    header.textContent = "Register";
     const form = document.createElement('form');
     fields.forEach(f => {
         const field = document.createElement(f.tag);
         Object.entries(f.attributes).forEach(([a,v]) => field.setAttribute(a,v))
         form.appendChild(field);
-    })
- //   form.addEventListener('submit', requestRegistration)
+    });
+ // form.addEventListener('submit', requestRegistration)
+    main.appendChild(header);
     main.appendChild(form);
 }
 
+function renderHabitForm() {
+    let checkboxForm = document.createElement('form');
+    const habits = ['Exercise 30 min', 'Drink 8 glasses of water', 'Get 8 hours of sleep', 'Healthy meal', 'Don\'t smoke', 'Walk the dog'];
 
-//function renderHabitForm() {};
+    header.textContent = "Choose a habit that you want to practise";
+
+    for (let i = 0; i < habits.length; i++) {
+        let checkBox = document.createElement('input');
+        checkBox.type = 'checkbox';
+        checkBox.id = habits[i];
+        checkBox.name = habits[i];
+        checkBox.value = habits[i];
+
+
+        let label = document.createElement('label');
+        label.htmlFor = habits[i];
+        label.appendChild(document.createTextNode(habits[i]));
+        
+        let br = document.createElement('br');
+    
+        checkboxForm.appendChild(checkBox);
+        checkboxForm.appendChild(label);
+        checkboxForm.appendChild(br);
+        
+    }
+    // form.addEventListener('submit', requestRegistration)
+    main.appendChild(header);
+    main.appendChild(checkboxForm);
+
+};
+
+function renderFrequencyForm () {
+    let checkboxForm = document.createElement('form');
+    const frequency = [ 'Hourly', 'Daily', 'Weekly', '3-times a day'];
+
+    header2.textContent = "Choose a frequency with which you would like to practice you habit";
+
+    for (let i = 0; i < frequency.length; i++) {
+        let checkBox = document.createElement('input');
+        checkBox.type = 'checkbox';
+        checkBox.id = frequency[i];
+        checkBox.name = frequency[i];
+        checkBox.value = frequency[i];
+
+
+        let label = document.createElement('label');
+        label.htmlFor = frequency[i];
+        label.appendChild(document.createTextNode(frequency[i]));
+        
+        let br = document.createElement('br');
+    
+        checkboxForm.appendChild(checkBox);
+        checkboxForm.appendChild(label);
+        checkboxForm.appendChild(br);
+        
+    }
+
+    main.appendChild(header2);
+    main.appendChild(checkboxForm);
+}
 
 function render404() {
-    const error = document.createElement('h2');
-    error.textContent = "Oops, we can't find that page sorry!";
-    main.appendChild(error);
+    header.textContent = "Oops, we can't find that page sorry!";
 }
+
