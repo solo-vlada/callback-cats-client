@@ -8,7 +8,7 @@ async function requestLogin(e) {
 		};
 		//UPDATE WITH SERVER LINK
 		const r = await fetch(
-			`https://callback-cats-server.herokuapp.com/users/register`,
+			`https://callback-cats-server.herokuapp.com/users/login`,
 			options
 		);
 		const data = await r.json();
@@ -31,7 +31,10 @@ async function requestRegistration(e) {
 			body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
 		};
 		//UPDATE WITH SERVER LINK
-		const r = await fetch(`http://localhost:3000/users/register`, options);
+		const r = await fetch(
+			`https://callback-cats-server.herokuapp.com/users/register`,
+			options
+		);
 		const data = await r.json();
 		if (data.err) {
 			throw Error(data.err);
