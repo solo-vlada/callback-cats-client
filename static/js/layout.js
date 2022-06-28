@@ -1,7 +1,7 @@
 const nav = document.querySelector("nav");
 
 const publicRoutes = ['#', '#login', '#register'];
-const privateRoutes = ['#habitForm', '#dashboard'];
+const privateRoutes = ['#habit', '#frequency', '#dashboard'];
 
 window.addEventListener('hashchange', updateContent);
 
@@ -35,8 +35,10 @@ function updateMain(path) {
             case '#register':
                 renderRegisterForm();
                 break;
-            case '#habitForm':
+            case '#habit':
                 renderHabitForm();
+                break;
+            case '#frequency':
                 renderFrequencyForm();
                 break;
             case '#dashboard':

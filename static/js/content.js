@@ -1,7 +1,9 @@
 const main = document.querySelector("main");
 const header = document.createElement('h2');
-const header2 = document.createElement('h2');
+//const header2 = document.createElement('h2');
 
+
+//Creates a login form
 function renderLoginForm() {
     const fields =  [
         {tag:'input', attributes: { type:'text', name:'username', placeholder:'Username' }},
@@ -15,11 +17,12 @@ function renderLoginForm() {
         Object.entries(f.attributes).forEach(([a,v]) => field.setAttribute(a,v))
         form.appendChild(field);
     })
-    //form.addEventListener('submit', requestLogin)
+    form.addEventListener('submit', requestLogin)
     main.appendChild(header);
     main.appendChild(form);
 }
 
+//Creates a registration form 
 function renderRegisterForm() {
     const fields = [
         {tag:'input', attributes: { type:'text', name:'username', placeholder:'Username' }},
@@ -36,11 +39,12 @@ function renderRegisterForm() {
         Object.entries(f.attributes).forEach(([a,v]) => field.setAttribute(a,v))
         form.appendChild(field);
     });
- // form.addEventListener('submit', requestRegistration)
+    form.addEventListener('submit', requestRegistration)
     main.appendChild(header);
     main.appendChild(form);
 }
 
+//Creates a checkbox to choose a habit 
 function renderHabitForm() {
     let checkboxForm = document.createElement('form');
     const habits = ['Exercise 30 min', 'Drink 8 glasses of water', 'Get 8 hours of sleep', 'Healthy meal', 'Don\'t smoke', 'Walk the dog'];
@@ -58,7 +62,6 @@ function renderHabitForm() {
         let label = document.createElement('label');
         label.htmlFor = habits[i];
         label.appendChild(document.createTextNode(habits[i]));
-        
         let br = document.createElement('br');
     
         checkboxForm.appendChild(checkBox);
@@ -66,17 +69,21 @@ function renderHabitForm() {
         checkboxForm.appendChild(br);
         
     }
-    // form.addEventListener('submit', requestRegistration)
+    let button = document.createElement('input');
+    button.setAttribute("type", "submit");
+    checkboxForm.appendChild(button);
+    checkboxForm.addEventListener('submit', postHabit)
     main.appendChild(header);
     main.appendChild(checkboxForm);
 
 };
 
+// Createas a checkbox form to choose a frequecy 
 function renderFrequencyForm () {
     let checkboxForm = document.createElement('form');
     const frequency = [ 'Hourly', 'Daily', 'Weekly', '3-times a day'];
 
-    header2.textContent = "Choose a frequency with which you would like to practice you habit";
+    header.textContent = "Choose a frequency with which you would like to practice you habit";
 
     for (let i = 0; i < frequency.length; i++) {
         let checkBox = document.createElement('input');
@@ -97,10 +104,16 @@ function renderFrequencyForm () {
         checkboxForm.appendChild(br);
         
     }
-
-    main.appendChild(header2);
+    let button = document.createElement('input');
+    button.setAttribute("type", "submit");
+    checkboxForm.appendChild(button);
+    checkboxForm.addEventListener('submit', postFrequency)
+    main.appendChild(header);
     main.appendChild(checkboxForm);
 }
+
+
+
 
 function render404() {
     header.textContent = "Oops, we can't find that page sorry!";

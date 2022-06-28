@@ -20,8 +20,10 @@ switchBtn.addEventListener("click", (e) => {
   }
 });
 
-const login = async () => {
-}
+
+//REMOVE CODE BELOW ?
+// const login = async () => {
+// }
 
 
 // onload, fetch the users data.
