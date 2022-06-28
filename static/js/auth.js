@@ -1,10 +1,13 @@
 async function requestLogin(e) {
 	e.preventDefault();
+	const username = e.target.username.value;
+	const password = e.target.password.value;
+
 	try {
 		const options = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
+			body: JSON.stringify({ username, password }),
 		};
 		//UPDATE WITH SERVER LINK
 		const r = await fetch(
@@ -23,12 +26,16 @@ async function requestLogin(e) {
 
 async function requestRegistration(e) {
 	e.preventDefault();
+	const username = e.target.username.value;
+	const email = e.target.email.value;
+	const password = e.target.password.value;
 
 	try {
 		const options = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
+
+			body: JSON.stringify({ username, email, password }),
 		};
 		//UPDATE WITH SERVER LINK
 		const r = await fetch(
