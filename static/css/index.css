@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300&display=swap');
+
+:root {
+    --primary: #FFF7EC;
+    --header-color: #035C42; 
+    --font-primary: 'Pacifico', cursive;
+    --font-accent: 'Kanit', sans-serif;
+    --font-text:'Hind', sans-serif;
+    --light: #FFF7F7;
+}
+
+* { box-sizing: border-box; }
+
+nav {
+    background-color: var(--primary);
+    display: flex;
+    justify-content: space-evenly;
+    margin: 30px;
+}
+
+nav a {
+    color: var(--header-color);
+    text-decoration: none;
+    padding: 20px;
+    font-size: 19px;
+    font-family: var(--font-accent);
+    font-weight: 700;
+
+}
+
+body {
+    margin: 0px 50px;
+    text-align: center;
+    background-color: var(--primary);
+}
+h1{
+    color: var(--header-color);
+    font-family: var(--font-primary);
+    font-size: 72px;
+}
+
+p {
+    font-size: 19px;
+    font-family: var(--font-text);
+    font-weight: 700;
+    line-height: 2;
+
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom:0;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    font-family: var(--font-accent);
+    background-color: var(--primary);
+}
+
+footer p {
+    font-size: 19px;
+}
