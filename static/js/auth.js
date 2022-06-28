@@ -96,12 +96,13 @@ async function postFrequency(e) {
 
 function login(data) {
 	console.log(data);
-	const payload = jwt_decode(data.token);
-	console.log(payload);
-	localStorage.setItem('token', data.token);
-	localStorage.setItem('username', payload.username);
-	localStorag.setItem('email', payload.email);
+	// const payload = jwt_decode(data.token);
+	// console.log(payload);
+	localStorage.setItem('token', data.accessToken);
 	location.hash = '#dashboard';
+	if (data.success) {
+		window.location.replace('/dashboad.html');
+	}
 }
 
 function logout() {
