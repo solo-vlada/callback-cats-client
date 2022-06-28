@@ -15,7 +15,7 @@ function renderLoginForm() {
         Object.entries(f.attributes).forEach(([a,v]) => field.setAttribute(a,v))
         form.appendChild(field);
     })
-    //form.addEventListener('submit', requestLogin)
+    form.addEventListener('submit', requestLogin)
     main.appendChild(header);
     main.appendChild(form);
 }
@@ -36,7 +36,7 @@ function renderRegisterForm() {
         Object.entries(f.attributes).forEach(([a,v]) => field.setAttribute(a,v))
         form.appendChild(field);
     });
- // form.addEventListener('submit', requestRegistration)
+    form.addEventListener('submit', requestRegistration)
     main.appendChild(header);
     main.appendChild(form);
 }
@@ -58,7 +58,6 @@ function renderHabitForm() {
         let label = document.createElement('label');
         label.htmlFor = habits[i];
         label.appendChild(document.createTextNode(habits[i]));
-        
         let br = document.createElement('br');
     
         checkboxForm.appendChild(checkBox);
@@ -66,7 +65,10 @@ function renderHabitForm() {
         checkboxForm.appendChild(br);
         
     }
-    // form.addEventListener('submit', requestRegistration)
+    let button = document.createElement('input');
+    button.setAttribute("type", "submit");
+    checkboxForm.appendChild(button);
+    //checkboxForm.addEventListener('submit', postHabit)
     main.appendChild(header);
     main.appendChild(checkboxForm);
 
@@ -97,10 +99,16 @@ function renderFrequencyForm () {
         checkboxForm.appendChild(br);
         
     }
-
+    let button = document.createElement('input');
+    button.setAttribute("type", "submit");
+    checkboxForm.appendChild(button);
+  //  checkboxForm.addEventListener('submit', postFrequency)
     main.appendChild(header2);
     main.appendChild(checkboxForm);
 }
+
+
+
 
 function render404() {
     header.textContent = "Oops, we can't find that page sorry!";
