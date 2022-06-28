@@ -1,0 +1,192 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+/* 
+ ::-webkit-scrollbar{ 
+display: none;
+}  */
+
+body{
+    overflow-x: hidden;
+}
+
+.swap-button{
+animation-duration: 0.2s;
+animation-fill-mode: forwards;
+animation-timing-function: linear;
+
+}
+.welcome-message{
+    display: none;
+}
+
+.dashboard-container{
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+
+.btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 4rem auto;
+}
+.btn{
+    width: 120px;
+    padding: 8px;
+    font-size: 10pt;
+    border: none;
+    border-radius: 3px;
+    background: black;
+    color: white;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.429);
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn:hover{
+    background: rgb(52, 52, 52);
+    color: white;
+}
+
+ .swap-button{
+            overflow: hidden;
+} 
+
+.stats-button{
+background-color:white;
+color: black;
+}
+
+.habbit-icon-container{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    width:100%;
+    flex-wrap: wrap;
+    transition: 0.4s;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    opacity: 1;
+    
+}
+.habbit-icon{
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    margin:10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.4s;
+    user-select: none;
+    background-image:radial-gradient(white 50%,rgb(225, 224, 224));
+    color: black;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.437);
+}
+
+.stats-container{
+    height: 500px;
+    margin-top: 6rem;
+    background-color: black;
+    color: white;
+    width: 94%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.stats-board{
+    width: 80%;
+    margin: 2rem auto;
+}
+.text-align-left{
+    width: 100%;
+    text-align: left;
+    border: solid white 1px;
+}
+.streak-statistics{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    justify-content: space-between;
+}
+.completion-statistics{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+padding: 10px;
+}
+.completion-progress-bar{
+    border: white solid 1px;
+    border-radius: 4px;
+    height: 20px;
+    width: 65%;
+    }
+.completed-trackers{
+    display: flex;
+    position: absolute;
+    top: 10rem;
+}
+
+@media only screen and (min-width:768px){
+    .btn{
+        padding: 20px;
+        width: 200px;
+        font-size: 16pt;
+    }
+    .habbit-icon{
+        height: 250px;
+        width: 250px;
+        margin: 20px;
+    }
+    .stats-board{
+        width: 400px;
+        background: white;
+        color: black;
+        border-radius: 4px;
+        padding: 10px;
+    }
+    .completion-progress-bar{
+        background: white;
+        border: solid black 1px;
+    }
+        .completed-trackers {
+            display: flex;
+            position: absolute;
+            top:12rem;
+        }
+}
+
+
+@keyframes slide-in{
+    from{
+        opacity: 0;
+        margin-left: 175vw;}
+}
+@keyframes slide-out{
+    to{
+        opacity: 0;
+        margin-left: -175vw;}
+}
+@keyframes spin {
+    50% {
+           background-color: white;
+           color: white;
+        }
+}
+
+@keyframes unspin {
+    50% {
+        background-color: white;
+            color: white;
+        }}
