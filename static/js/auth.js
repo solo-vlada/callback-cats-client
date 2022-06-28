@@ -36,6 +36,43 @@ async function requestRegistration(e) {
     }
 }
 
+async function postHabit(e) {
+    e.preventDefault();
+
+    try {
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+        }
+        //UPDATE WITH SERVER LINK
+        const r = await fetch(`http://localhost:3000/users/habits`, options);
+        const data  = await r.json();
+        if(data.err) {throw Error(data.err) }
+    } catch (err) {
+        console.warn(err);
+    }
+
+}
+
+
+async function postFrequency(e) {
+    e.preventDefault();
+    try {
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+        }
+        //UPDATE WITH SERVER LINK
+        const r = await fetch(`http://localhost:3000/users/habits`, options);
+        const data  = await r.json();
+        if(data.err) {throw Error(data.err) }
+    } catch (err) {
+        console.warn(err);
+    }
+}
+
 function login(data) {
     console.log(data);
     const payload = jwt_decode(data.token);

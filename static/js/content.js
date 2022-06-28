@@ -1,7 +1,9 @@
 const main = document.querySelector("main");
 const header = document.createElement('h2');
-const header2 = document.createElement('h2');
+//const header2 = document.createElement('h2');
 
+
+//Creates a login form
 function renderLoginForm() {
     const fields =  [
         {tag:'input', attributes: { type:'text', name:'username', placeholder:'Username' }},
@@ -20,6 +22,7 @@ function renderLoginForm() {
     main.appendChild(form);
 }
 
+//Creates a registration form 
 function renderRegisterForm() {
     const fields = [
         {tag:'input', attributes: { type:'text', name:'username', placeholder:'Username' }},
@@ -41,6 +44,7 @@ function renderRegisterForm() {
     main.appendChild(form);
 }
 
+//Creates a checkbox to choose a habit 
 function renderHabitForm() {
     let checkboxForm = document.createElement('form');
     const habits = ['Exercise 30 min', 'Drink 8 glasses of water', 'Get 8 hours of sleep', 'Healthy meal', 'Don\'t smoke', 'Walk the dog'];
@@ -68,17 +72,18 @@ function renderHabitForm() {
     let button = document.createElement('input');
     button.setAttribute("type", "submit");
     checkboxForm.appendChild(button);
-    //checkboxForm.addEventListener('submit', postHabit)
+    checkboxForm.addEventListener('submit', postHabit)
     main.appendChild(header);
     main.appendChild(checkboxForm);
 
 };
 
+// Createas a checkbox form to choose a frequecy 
 function renderFrequencyForm () {
     let checkboxForm = document.createElement('form');
     const frequency = [ 'Hourly', 'Daily', 'Weekly', '3-times a day'];
 
-    header2.textContent = "Choose a frequency with which you would like to practice you habit";
+    header.textContent = "Choose a frequency with which you would like to practice you habit";
 
     for (let i = 0; i < frequency.length; i++) {
         let checkBox = document.createElement('input');
@@ -102,8 +107,8 @@ function renderFrequencyForm () {
     let button = document.createElement('input');
     button.setAttribute("type", "submit");
     checkboxForm.appendChild(button);
-  //  checkboxForm.addEventListener('submit', postFrequency)
-    main.appendChild(header2);
+    checkboxForm.addEventListener('submit', postFrequency)
+    main.appendChild(header);
     main.appendChild(checkboxForm);
 }
 
