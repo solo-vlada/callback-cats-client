@@ -228,7 +228,7 @@ const iconContainer = document.querySelector(".habbit-icon-container");
 const completedTrackers = document.querySelector(".completed-trackers");
 const welcomeMessage = document.querySelector(".welcome-message");
 const habits = document.querySelector("#habits");
-const oldHabits = document.querySelector("#oldhabits");
+const oldHabits = document.querySelector("#old-habits");
 const getUserData = require("./getUserData");
 
 let trackerState = false;
@@ -245,15 +245,14 @@ window.addEventListener("DOMContentLoaded", async () => {
     return window.location.replace("/");
   }
   welcomeMessage.textContent = `Welcome, ${user.username}`;
-  user.habits.map((element) => {
+  user.habits.map((element, index) => {
+    if (index > 5) return;
+    // console.log(user.habits);
     const habitIcon = document.createElement("div");
     habitIcon.className = "habbit-icon";
     habitIcon.textContent = element.habitType;
-    habits.append(habitIcon);
+    !element.completed ? habits.append(habitIcon) : oldHabits.append(habitIcon);
   });
-  user && user.habits.map((habit) => chart1Arr.push(habit.toString()));
-  // await renderChart1();
-  console.log(user);
 });
 
 switchBtn.addEventListener("click", (e) => {
@@ -392,10 +391,12 @@ async function postHabit(e) {
       "http://localhost:3000/habits",
       options
     );
-    console.log("submitted to front end");
+    // console.log("submitted to front end");
     const data = await r.json();
 
-    if (data.err) {
+    if (!data.err) {
+      return data;
+    } else {
       console.log(data.err);
       throw Error(data.err);
     }
@@ -404,9 +405,9 @@ async function postHabit(e) {
   }
 }
 
-habitForm.addEventListener("submit", (e) => {
+habitForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  postHabit(e);
+  const result = await postHabit(e);
 });
 //  habit form /////////////////////////////////////////////
 

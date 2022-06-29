@@ -3,7 +3,7 @@ const iconContainer = document.querySelector(".habbit-icon-container");
 const completedTrackers = document.querySelector(".completed-trackers");
 const welcomeMessage = document.querySelector(".welcome-message");
 const habits = document.querySelector("#habits");
-const oldHabits = document.querySelector("#oldhabits");
+const oldHabits = document.querySelector("#old-habits");
 const getUserData = require("./getUserData");
 
 let trackerState = false;
@@ -20,15 +20,14 @@ window.addEventListener("DOMContentLoaded", async () => {
     return window.location.replace("/");
   }
   welcomeMessage.textContent = `Welcome, ${user.username}`;
-  user.habits.map((element) => {
+  user.habits.map((element, index) => {
+    if (index > 5) return;
+    // console.log(user.habits);
     const habitIcon = document.createElement("div");
     habitIcon.className = "habbit-icon";
     habitIcon.textContent = element.habitType;
-    habits.append(habitIcon);
+    !element.completed ? habits.append(habitIcon) : oldHabits.append(habitIcon);
   });
-  user && user.habits.map((habit) => chart1Arr.push(habit.toString()));
-  // await renderChart1();
-  console.log(user);
 });
 
 switchBtn.addEventListener("click", (e) => {

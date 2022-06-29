@@ -31,6 +31,7 @@ animation-timing-function: linear;
 
 .dashboard-container{
     min-width: 100vw;
+    overflow-x: hidden;
 }
 
 
