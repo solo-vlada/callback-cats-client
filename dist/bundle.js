@@ -1,4 +1,8 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+
+const loginForm = document.querySelector('#loginForm');
+const registerForm = document.querySelector('#registerForm');
+
 async function requestLogin(e) {
   e.preventDefault();
   const username = e.target.username.value;
@@ -30,7 +34,10 @@ async function requestLogin(e) {
   }
 }
 
-const registerForm = document.querySelector('#registerForm');
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  requestLogin(e);
+});
 
 
 async function requestRegistration(e) {
@@ -67,6 +74,8 @@ registerForm.addEventListener("submit", (e) => {
   window.location.replace("/habit.html");
 });
 
+
+
 //REMOVE CODE BELOW
 // async function postFrequency(e) {
 // 	e.preventDefault();
@@ -99,16 +108,16 @@ registerForm.addEventListener("submit", (e) => {
 // 	}
 // }
 
-function logout() {
-  localStorage.clear();
-  location.hash = "#login";
-}
+// function logout() {
+//   localStorage.clear();
+//   location.hash = "#login";
+// }
 
 //REMOVE THIS CODE
-function currentUser() {
-  const usernme = localStorage.getItem("username");
-  return usernme;
-}
+// function currentUser() {
+//   const usernme = localStorage.getItem("username");
+//   return usernme;
+// }
 
 },{}],2:[function(require,module,exports){
 const main = document.querySelector("main");
