@@ -11,6 +11,10 @@
 			src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"
 		></script>
 		<script defer src="./static/js/dashboard.js"></script>
+	<script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+		integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 		<title>Dashboard</title>
 	</head>
 	<body>
@@ -21,7 +25,7 @@
 				<button class="swap-button btn">View Completed</button>
 			</div>
 			<!-- this is the circular icons for each habbit -->
-			<div class="habbit-icon-container">
+			<div id="habits" class="habbit-icon-container">
 				<div class="habbit-icon">habbit 1</div>
 				<div class="habbit-icon">habbit 2</div>
 				<div class="habbit-icon">habbit 3</div>
@@ -29,7 +33,7 @@
 				<div class="habbit-icon">habbit 5</div>
 				<div class="habbit-icon">habbit 6</div>
 			</div>
-			<div class="completed-trackers habbit-icon-container">
+			<div id="old-habits" class="completed-trackers habbit-icon-container">
 				<div class="habbit-icon">old habbit 1</div>
 				<div class="habbit-icon">old habbit 2</div>
 				<div class="habbit-icon">old habbit 3</div>
@@ -50,7 +54,14 @@
 							<div class="completion-progress-bar"></div>
 						</li>
 					</ul>
-					<div class="chart-statistics"></div>
+					<div class="chart-statistics">
+						<div class="chart-statistics-left">
+							<canvas id="canvas-left"></canvas>
+						</div>
+						<div class="chart-statistics-right">
+							<canvas id="canvas-right"></canvas>
+						</div>
+					</div>
 					<div class="calendar-statistics"></div>
 				</div>
 			</div>
