@@ -91,7 +91,7 @@ async function postHabit(e) {
     //UPDATE WITH SERVER LINK
     const r = await fetch(
       `https://callback-cats-server.herokuapp.com/habits`,
-      //   "http://localhost:3000/habits",
+      // "http://localhost:3000/habits",
       options
     );
     // console.log("submitted to front end");

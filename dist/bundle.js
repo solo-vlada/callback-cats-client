@@ -30,6 +30,9 @@ async function requestLogin(e) {
   }
 }
 
+const registerForm = document.querySelector('#registerForm');
+
+
 async function requestRegistration(e) {
   e.preventDefault();
   const username = e.target.username.value;
@@ -57,6 +60,12 @@ async function requestRegistration(e) {
     console.warn(err);
   }
 }
+
+registerForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  requestRegistration(e);
+  window.location.replace("/habit.html");
+});
 
 //REMOVE CODE BELOW
 // async function postFrequency(e) {
@@ -223,78 +232,6 @@ function render404() {
 
 
 },{}],3:[function(require,module,exports){
-const switchBtn = document.querySelector(".swap-button");
-const iconContainer = document.querySelector(".habbit-icon-container");
-const completedTrackers = document.querySelector(".completed-trackers");
-const welcomeMessage = document.querySelector(".welcome-message");
-const habits = document.querySelector("#habits");
-const oldHabits = document.querySelector("#old-habits");
-const getUserData = require("./getUserData");
-
-let trackerState = false;
-let user;
-
-window.addEventListener("DOMContentLoaded", async () => {
-  let checkToken = sessionStorage.getItem("accesstoken");
-  if (!checkToken) {
-    return window.location.replace("/");
-  } else {
-    user = await getUserData();
-  }
-  if (!user) {
-    return window.location.replace("/");
-  }
-  welcomeMessage.textContent = `Welcome, ${user.username}`;
-  user.habits.map((element, index) => {
-    if (index > 5) return;
-    // console.log(user.habits);
-    const habitIcon = document.createElement("div");
-    habitIcon.className = "habbit-icon";
-    habitIcon.textContent = element.habitType;
-    !element.completed ? habits.append(habitIcon) : oldHabits.append(habitIcon);
-  });
-});
-
-switchBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  trackerState = !trackerState;
-  if (!trackerState) {
-    iconContainer.style.animationName = "slide-in";
-    completedTrackers.style.animationName = "slide-out";
-    switchBtn.textContent = "View Completed";
-    switchBtn.style.animationName = "spin";
-  } else {
-    iconContainer.style.animationName = "slide-out";
-    completedTrackers.style.animationName = "slide-in";
-    switchBtn.textContent = "View in-progress";
-    switchBtn.style.animationName = "unspin";
-  }
-});
-
-// GRAPHS API ////////////////////////////////////////////////////
-
-const renderChart1 = async () => {
-  const ctx = document.querySelector("#canvas-left").getContext("2d");
-  const labels = [1, 2, 3, 4, 5, 6, 7];
-
-  const data = {
-    labels,
-    datasets: [
-      {
-        data: [1, 2, 2, 3, 4, 5, 5, 6, 7],
-        label: "Progress This Week",
-      },
-    ],
-  };
-
-  const config = { type: "bar", data, options: { responsive: true } };
-
-  const myChart = new Chart(ctx, config);
-};
-
-// GRAPHS API ////////////////////////////////////////////////////
-
-},{"./getUserData":5}],4:[function(require,module,exports){
 // dom variables
 const msf_getFsTag = document.getElementsByTagName("fieldset");
 
@@ -387,8 +324,8 @@ async function postHabit(e) {
     };
     //UPDATE WITH SERVER LINK
     const r = await fetch(
-      //   `https://callback-cats-server.herokuapp.com/habits`,
-      "http://localhost:3000/habits",
+      `https://callback-cats-server.herokuapp.com/habits`,
+      // "http://localhost:3000/habits",
       options
     );
     // console.log("submitted to front end");
@@ -411,7 +348,79 @@ habitForm.addEventListener("submit", async (e) => {
 });
 //  habit form /////////////////////////////////////////////
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
+const switchBtn = document.querySelector(".swap-button");
+const iconContainer = document.querySelector(".habbit-icon-container");
+const completedTrackers = document.querySelector(".completed-trackers");
+const welcomeMessage = document.querySelector(".welcome-message");
+const habits = document.querySelector("#habits");
+const oldHabits = document.querySelector("#old-habits");
+const getUserData = require("./getUserData");
+
+let trackerState = false;
+let user;
+
+window.addEventListener("DOMContentLoaded", async () => {
+  let checkToken = sessionStorage.getItem("accesstoken");
+  if (!checkToken) {
+    return window.location.replace("/");
+  } else {
+    user = await getUserData();
+  }
+  if (!user) {
+    return window.location.replace("/");
+  }
+  welcomeMessage.textContent = `Welcome, ${user.username}`;
+  user.habits.map((element, index) => {
+    if (index > 5) return;
+    // console.log(user.habits);
+    const habitIcon = document.createElement("div");
+    habitIcon.className = "habbit-icon";
+    habitIcon.textContent = element.habitType;
+    !element.completed ? habits.append(habitIcon) : oldHabits.append(habitIcon);
+  });
+});
+
+switchBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  trackerState = !trackerState;
+  if (!trackerState) {
+    iconContainer.style.animationName = "slide-in";
+    completedTrackers.style.animationName = "slide-out";
+    switchBtn.textContent = "View Completed";
+    switchBtn.style.animationName = "spin";
+  } else {
+    iconContainer.style.animationName = "slide-out";
+    completedTrackers.style.animationName = "slide-in";
+    switchBtn.textContent = "View in-progress";
+    switchBtn.style.animationName = "unspin";
+  }
+});
+
+// GRAPHS API ////////////////////////////////////////////////////
+
+const renderChart1 = async () => {
+  const ctx = document.querySelector("#canvas-left").getContext("2d");
+  const labels = [1, 2, 3, 4, 5, 6, 7];
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        data: [1, 2, 2, 3, 4, 5, 5, 6, 7],
+        label: "Progress This Week",
+      },
+    ],
+  };
+
+  const config = { type: "bar", data, options: { responsive: true } };
+
+  const myChart = new Chart(ctx, config);
+};
+
+// GRAPHS API ////////////////////////////////////////////////////
+
+},{"./getUserData":5}],5:[function(require,module,exports){
 const getUserData = async () => {
   let fetchUserData;
   const accessToken = sessionStorage.getItem("accesstoken");
@@ -492,7 +501,7 @@ function updateMain(path) {
     } else {
         main.innerHTML += `
             <h1 class="title">Develop good habits!</h1>
-            <img class="logo" src="#" alt="logo">
+            <img class="logo" src="/static/img/habits-hero.png" alt="logo">
             <p class="description">Description...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sodales mi a risus fermentum vestibulum. Morbi quis massa facilisis, aliquet dui vel, fermentum metus. Fusce mauris tortor, viverra sit amet mi in, accumsan aliquet tortor.</p>
         `;
         }
