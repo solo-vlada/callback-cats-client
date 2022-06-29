@@ -65,7 +65,7 @@ async function postHabit(e) {
 		};
 		//UPDATE WITH SERVER LINK
 		const r = await fetch(
-			`https://callback-cats-server.herokuapp.com/users/habit`,
+			`https://callback-cats-server.herokuapp.com/habits`,
 			options
 		);
 		const data = await r.json();
