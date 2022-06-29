@@ -8,6 +8,7 @@ async function requestLogin(e) {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      mode: "cors",
       body: JSON.stringify({ username, password }),
     };
     //UPDATE WITH SERVER LINK
@@ -255,7 +256,6 @@ const getUserData = require("./getUserData");
 let trackerState = false;
 let user;
 
-
 window.addEventListener("DOMContentLoaded", async () => {
   let checkToken = sessionStorage.getItem("accesstoken");
   if (!checkToken) {
@@ -273,6 +273,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     habitIcon.textContent = element.habitType;
     habits.append(habitIcon);
   });
+  user && user.habits.map((habit) => chart1Arr.push(habit.toString()));
+  // await renderChart1();
   console.log(user);
 });
 
@@ -294,23 +296,24 @@ switchBtn.addEventListener("click", (e) => {
 
 // GRAPHS API ////////////////////////////////////////////////////
 
-const ctx = document.querySelector("#canvas-left").getContext("2d");
+const renderChart1 = async () => {
+  const ctx = document.querySelector("#canvas-left").getContext("2d");
+  const labels = [1, 2, 3, 4, 5, 6, 7];
 
-const labels = ["1", "2", "3", "4", "5", "6", "7"];
+  const data = {
+    labels,
+    datasets: [
+      {
+        data: [1, 2, 2, 3, 4, 5, 5, 6, 7],
+        label: "Progress This Week",
+      },
+    ],
+  };
 
-const data = {
-  labels,
-  datasets: [
-    {
-      data: [1, 2, 2, 3, 4, 5, 5, 6, 7],
-      label: "Progress This Week",
-    },
-  ],
+  const config = { type: "bar", data, options: { responsive: true } };
+
+  const myChart = new Chart(ctx, config);
 };
-
-const config = { type: "line", data, options: { responsive: true } };
-
-const myChart = new Chart(ctx, config);
 
 // GRAPHS API ////////////////////////////////////////////////////
 
@@ -326,6 +329,8 @@ const getUserData = async () => {
     fetchUserData = await fetch(
       `https://callback-cats-server.herokuapp.com/users/${userId.id}`,
       {
+        method: "GET",
+        mode: "cors",
         headers: new Headers({
           accesstoken: sessionStorage.getItem("accesstoken"),
         }),
@@ -425,6 +430,33 @@ function updateContent() {
 updateContent();
 
 },{}],6:[function(require,module,exports){
+const { getUserData } = require("./getUserData");
+
+let user;
+window.addEventListener("DOMContentLoaded", async () => {
+  let checkToken = sessionStorage.getItem("accesstoken");
+  if (!checkToken) {
+    return window.location.replace("/");
+  } else {
+    user = await getUserData();
+  }
+  if (!user) {
+    return window.location.replace("/");
+  }
+  user.habits.map((element) => {
+    const habitIcon = document.createElement("div");
+    habitIcon.className = "habbit-icon";
+    habitIcon.textContent = element.habitType;
+    habits.append(habitIcon);
+  });
+  user && user.habits.map((habit) => chart1Arr.push(habit.toString()));
+  await renderChart1();
+  console.log(user);
+});
+
+module.exports = user;
+
+},{"./getUserData":4}],7:[function(require,module,exports){
 async function getAllUsers() {
     try {
         //UPDATE WITH SERVER LINKS
@@ -438,4 +470,4 @@ async function getAllUsers() {
     }
 }
 
-},{}]},{},[1,2,3,4,5,6]);
+},{}]},{},[1,2,3,4,5,6,7]);

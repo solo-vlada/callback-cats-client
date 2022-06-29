@@ -9,7 +9,6 @@ const getUserData = require("./getUserData");
 let trackerState = false;
 let user;
 
-
 window.addEventListener("DOMContentLoaded", async () => {
   let checkToken = sessionStorage.getItem("accesstoken");
   if (!checkToken) {
@@ -27,6 +26,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     habitIcon.textContent = element.habitType;
     habits.append(habitIcon);
   });
+  user && user.habits.map((habit) => chart1Arr.push(habit.toString()));
+  // await renderChart1();
   console.log(user);
 });
 
@@ -48,22 +49,23 @@ switchBtn.addEventListener("click", (e) => {
 
 // GRAPHS API ////////////////////////////////////////////////////
 
-const ctx = document.querySelector("#canvas-left").getContext("2d");
+const renderChart1 = async () => {
+  const ctx = document.querySelector("#canvas-left").getContext("2d");
+  const labels = [1, 2, 3, 4, 5, 6, 7];
 
-const labels = ["1", "2", "3", "4", "5", "6", "7"];
+  const data = {
+    labels,
+    datasets: [
+      {
+        data: [1, 2, 2, 3, 4, 5, 5, 6, 7],
+        label: "Progress This Week",
+      },
+    ],
+  };
 
-const data = {
-  labels,
-  datasets: [
-    {
-      data: [1, 2, 2, 3, 4, 5, 5, 6, 7],
-      label: "Progress This Week",
-    },
-  ],
+  const config = { type: "bar", data, options: { responsive: true } };
+
+  const myChart = new Chart(ctx, config);
 };
-
-const config = { type: "line", data, options: { responsive: true } };
-
-const myChart = new Chart(ctx, config);
 
 // GRAPHS API ////////////////////////////////////////////////////

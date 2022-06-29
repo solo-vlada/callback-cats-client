@@ -9,6 +9,8 @@ const getUserData = async () => {
     fetchUserData = await fetch(
       `https://callback-cats-server.herokuapp.com/users/${userId.id}`,
       {
+        method: "GET",
+        mode: "cors",
         headers: new Headers({
           accesstoken: sessionStorage.getItem("accesstoken"),
         }),
