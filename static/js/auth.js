@@ -72,7 +72,6 @@ async function postHabit(e) {
 		if (data.err) {
 			throw Error(data.err);
 		}
-		window.location.replace('/dashboard.html');
 
 	} catch (err) {
 		console.warn(err);
