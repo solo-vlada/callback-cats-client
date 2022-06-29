@@ -75,6 +75,10 @@ p {
     line-height: 2;
 }
 
+.description{
+    margin-bottom: 100px;
+}
+
 /*                  BURGER MENU                  */
 .burger{
     height: 75px;
@@ -99,7 +103,7 @@ p {
 }
 
 #dropdown-menu{
-    position: absolute;
+    position: fixed;
     width: 175px;
     right: 0rem;
     background: white;
