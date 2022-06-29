@@ -1,8 +1,56 @@
 const switchBtn = document.querySelector(".swap-button");
 const iconContainer = document.querySelector(".habbit-icon-container");
 const completedTrackers = document.querySelector(".completed-trackers");
+const welcomeMessage = document.querySelector(".welcome-message");
+const habits = document.querySelector("#habits");
+const oldHabits = document.querySelector("#oldhabits");
+let trackerState = false;
+let user;
 
-let trackerState = true;
+const getUserData = async () => {
+  let fetchData;
+  const accessToken = sessionStorage.getItem("accesstoken");
+  const userId = jwt_decode(accessToken);
+  const options = new Headers({
+    accesstoken: sessionStorage.getItem("accesstoken"),
+  });
+  try {
+    fetchData = await fetch(
+      `https://callback-cats-server.herokuapp.com/users/${userId.id}`,
+      {
+        headers: new Headers({
+          accesstoken: sessionStorage.getItem("accesstoken"),
+        }),
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+
+  let result = await fetchData.json();
+  // this line might be wrong
+  return result.data.user;
+};
+
+window.addEventListener("DOMContentLoaded", async () => {
+  let checkToken = sessionStorage.getItem("accesstoken");
+  if (!checkToken) {
+    return window.location.replace("/");
+  } else {
+    user = await getUserData();
+  }
+  if (!user) {
+    return window.location.replace("/");
+  }
+  welcomeMessage.textContent = `Welcome, ${user.username}`;
+  user.habits.map((element) => {
+    const habitIcon = document.createElement("div");
+    habitIcon.className("habbit-icon");
+    habitIcon.textContent = element.habitType;
+    habits.append(habitIcon);
+  });
+  console.log(user);
+});
 
 switchBtn.addEventListener("click", (e) => {
   e.stopPropagation();
@@ -10,31 +58,34 @@ switchBtn.addEventListener("click", (e) => {
   if (!trackerState) {
     iconContainer.style.animationName = "slide-in";
     completedTrackers.style.animationName = "slide-out";
-    switchBtn.textContent = "View in-progress";
+    switchBtn.textContent = "View Completed";
     switchBtn.style.animationName = "spin";
   } else {
     iconContainer.style.animationName = "slide-out";
     completedTrackers.style.animationName = "slide-in";
-    switchBtn.textContent = "View Completed";
+    switchBtn.textContent = "View in-progress";
     switchBtn.style.animationName = "unspin";
   }
 });
 
+// GRAPHS API ////////////////////////////////////////////////////
 
-//REMOVE CODE BELOW ?
-// const login = async () => {
-// }
+const ctx = document.querySelector("#canvas-left").getContext("2d");
 
+const labels = ["1", "2", "3", "4", "5", "6", "7"];
 
-// onload, fetch the users data.
+const data = {
+  labels,
+  datasets: [
+    {
+      data: [1, 2, 2, 3, 4, 5, 5, 6, 7],
+      label: "Progress This Week",
+    },
+  ],
+};
 
-// let user;
+const config = { type: "line", data, options: { responsive: true } };
 
-// const getUserStats = async () => {
-//   let id = sessionStorage.getItem("id");
-//   const result = await fetch(`http://localhost:3000/user/${id}`{mode:"no-cors"});
-//   const user = result.json();
-//   console.log(user);
-// };
+const myChart = new Chart(ctx, config);
 
-// getUserStats();
+// GRAPHS API ////////////////////////////////////////////////////

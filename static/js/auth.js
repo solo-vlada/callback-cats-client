@@ -18,8 +18,8 @@ async function requestLogin(e) {
 			throw Error(data.err);
 		}
 		if (data.success) {
-			localStorage.setItem('accesstoken', data.accessToken);
-			window.location.replace('/dashboard.html');
+			sessionStorage.setItem('accesstoken', data.accessToken);
+      window.location.replace('/dashboard.html');
 		}
 		//  login(data);
 	} catch (err) {

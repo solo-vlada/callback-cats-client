@@ -1,50 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./static/css/dashboard.css">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./static/css/dashboard.css" />
     <link rel="icon" href="./static/img/favicon.png">
-    <script defer src="./js/static/dashboard.js"></script>
-  
-    <title>Dashboard</title>
-</head>
-<body>
-    <div class="dashboard-container">
-        <h1 class="welcome-message">Hello, User</h1>
-        <!-- this button will switch between current trackers and completed trackers -->
-<div class="btn-container">
-            <button class="swap-button btn">View Completed</button>
-</div>        <!-- this is the circular icons for each habbit -->
-        <div class="habbit-icon-container">
-            <div class="habbit-icon">habbit 1</div>
-            <div class="habbit-icon">habbit 2</div>
-            <div class="habbit-icon">habbit 3</div>
-            <div class="habbit-icon">habbit 4</div>
-            <div class="habbit-icon">habbit 5</div>
-            <div class="habbit-icon">habbit 6</div>
-        </div>
-        <div class="completed-trackers habbit-icon-container">
-            <div class="habbit-icon">old habbit 1</div>
-            <div class="habbit-icon">old habbit 2</div>
-            <div class="habbit-icon">old habbit 3</div>
-            <div class="habbit-icon">old habbit 4</div>
-            <div class="habbit-icon">old habbit 5</div>
-            <div class="habbit-icon">oldhabbit 6</div>
-        </div>
-        <div class="stats-container">
-            <button class="stats-button btn">Stats</button>
-                <div class="stats-board">
-                    <ul class="stats">
-                        <li class="streak-statistics"><p >Streaks:</p><div class="streaks-count"><p>4</p></div></li>
-                        <li class="completion-statistics"><p >Completeion:</p> <div class="completion-progress-bar"></div></li>
-                    </ul>
-                        <div class="chart-statistics"></div>    
-                        <div class="calendar-statistics"></div>        
-                </div>
-        </div>
-    </div>
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"
+		></script>
+		<script defer src="./static/js/dashboard.js"></script>
+	<script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+		integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-</body>
+		<title>Dashboard</title>
+	</head>
+	<body>
+		<div class="dashboard-container">
+			<h1 class="welcome-message">Hello, User</h1>
+			<!-- this button will switch between current trackers and completed trackers -->
+			<div class="btn-container">
+				<button class="swap-button btn">View Completed</button>
+			</div>
+			<!-- this is the circular icons for each habbit -->
+			<div id="habits" class="habbit-icon-container">
+				<div class="habbit-icon">habbit 1</div>
+				<div class="habbit-icon">habbit 2</div>
+				<div class="habbit-icon">habbit 3</div>
+				<div class="habbit-icon">habbit 4</div>
+				<div class="habbit-icon">habbit 5</div>
+				<div class="habbit-icon">habbit 6</div>
+			</div>
+			<div id="old-habits" class="completed-trackers habbit-icon-container">
+				<div class="habbit-icon">old habbit 1</div>
+				<div class="habbit-icon">old habbit 2</div>
+				<div class="habbit-icon">old habbit 3</div>
+				<div class="habbit-icon">old habbit 4</div>
+				<div class="habbit-icon">old habbit 5</div>
+				<div class="habbit-icon">oldhabbit 6</div>
+			</div>
+			<div class="stats-container">
+				<button class="stats-button btn">Stats</button>
+				<div class="stats-board">
+					<ul class="stats">
+						<li class="streak-statistics">
+							<p>Streaks:</p>
+							<div class="streaks-count"><p>4</p></div>
+						</li>
+						<li class="completion-statistics">
+							<p>Completeion:</p>
+							<div class="completion-progress-bar"></div>
+						</li>
+					</ul>
+					<div class="chart-statistics">
+						<div class="chart-statistics-left">
+							<canvas id="canvas-left"></canvas>
+						</div>
+						<div class="chart-statistics-right">
+							<canvas id="canvas-right"></canvas>
+						</div>
+					</div>
+					<div class="calendar-statistics"></div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --verbose --maxWorkers=1",
-    "coverage": "jest --coverage --verbose /dom/"
+    "coverage": "jest --coverage --verbose"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,6 @@
   "homepage": "https://github.com/solo-vlada/callback-cats-client#readme",
   "devDependencies": {
     "jest": "^28.1.1",
-    "jest-environment-jsdom": "^28.1.1",
-    "jest-fetch-mock": "^3.0.3",
-    "jsdom": "^20.0.0"
+    "jest-environment-jsdom": "^28.1.1"
   }
 }
