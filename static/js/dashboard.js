@@ -4,16 +4,41 @@ const completedTrackers = document.querySelector(".completed-trackers");
 const welcomeMessage = document.querySelector(".welcome-message");
 const habits = document.querySelector("#habits");
 const oldHabits = document.querySelector("#old-habits");
-const getUserData = require("./getUserData");
 
 let trackerState = false;
 let user;
+
+const getUserData = async () => {
+  let fetchUserData;
+  const accessToken = sessionStorage.getItem("accesstoken");
+  const userId = jwt_decode(accessToken);
+  try {
+    fetchUserData = await fetch(
+      `https://callback-cats-server.herokuapp.com/users/${userId.id}`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: new Headers({
+          accesstoken: sessionStorage.getItem("accesstoken"),
+        }),
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+
+  let result = await fetchUserData.json();
+  // this line might be wrong
+  console.log(result.data.user);
+  return result.data.user;
+};
 
 window.addEventListener("DOMContentLoaded", async () => {
   let checkToken = sessionStorage.getItem("accesstoken");
   if (!checkToken) {
     return window.location.replace("/");
   } else {
+    console.log("accesstoken present, getting user data.");
     user = await getUserData();
   }
   if (!user) {
