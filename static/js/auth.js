@@ -27,8 +27,7 @@ async function requestLogin(e) {
   }
 }
 
-const registerForm = document.querySelector('#registerForm');
-
+const registerForm = document.querySelector("#registerForm");
 
 async function requestRegistration(e) {
   e.preventDefault();
@@ -40,7 +39,7 @@ async function requestRegistration(e) {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-
+      mode: "cors",
       body: JSON.stringify({ username, email, password }),
     };
     const r = await fetch(
@@ -51,15 +50,15 @@ async function requestRegistration(e) {
     if (data.err) {
       throw Error(data.err);
     }
-    requestLogin(e);
+    await requestLogin(e);
   } catch (err) {
     console.warn(err);
   }
 }
 
-registerForm.addEventListener("submit", (e) => {
+registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  requestRegistration(e);
+  await requestRegistration(e);
   window.location.replace("/habit.html");
 });
 
@@ -100,8 +99,8 @@ function logout() {
   location.hash = "#login";
 }
 
-//REMOVE THIS CODE
-function currentUser() {
-  const usernme = localStorage.getItem("username");
-  return usernme;
-}
+// //REMOVE THIS CODE
+// function currentUser() {
+//   const usernme = localStorage.getItem("username");
+//   return usernme;
+// }
