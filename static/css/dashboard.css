@@ -79,6 +79,7 @@ color: black;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
     opacity: 1;
+    min-height: 200px;
     
 }
 .habbit-icon{
@@ -144,7 +145,7 @@ padding: 10px;
     position: absolute;
     top: 10rem;
     z-index: 50;
-    display: none;
+    margin-left: 175vw;
     /* transform: translateY(150vw); */
 }
 .chart-statistics{
@@ -188,23 +189,31 @@ padding: 10px;
         border: solid black 1px;
     }
         .completed-trackers {
-            display: flex;
             position: absolute;
             top:12rem;
         }
+        .habbit-icon-container{
+            min-height: 500px;
+        }
 }
+
 
 
 @keyframes slide-in{
     from{
         opacity: 0;
         margin-left: 175vw;}
-}
+
 to{
+    margin-left: 0;
     opacity: 1;
-}
+}}
 @keyframes slide-out{
+    from{
+        margin-left: 0;
+    }
     to{
+        display: flex;
         opacity: 0;
         margin-left: -175vw;}
 }

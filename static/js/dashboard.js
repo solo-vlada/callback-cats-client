@@ -4,33 +4,11 @@ const completedTrackers = document.querySelector(".completed-trackers");
 const welcomeMessage = document.querySelector(".welcome-message");
 const habits = document.querySelector("#habits");
 const oldHabits = document.querySelector("#oldhabits");
+const getUserData = require("./getUserData");
+
 let trackerState = false;
 let user;
 
-const getUserData = async () => {
-  let fetchData;
-  const accessToken = sessionStorage.getItem("accesstoken");
-  const userId = jwt_decode(accessToken);
-  const options = new Headers({
-    accesstoken: sessionStorage.getItem("accesstoken"),
-  });
-  try {
-    fetchData = await fetch(
-      `https://callback-cats-server.herokuapp.com/users/${userId.id}`,
-      {
-        headers: new Headers({
-          accesstoken: sessionStorage.getItem("accesstoken"),
-        }),
-      }
-    );
-  } catch (err) {
-    console.log(err);
-  }
-
-  let result = await fetchData.json();
-  // this line might be wrong
-  return result.data.user;
-};
 
 window.addEventListener("DOMContentLoaded", async () => {
   let checkToken = sessionStorage.getItem("accesstoken");
@@ -45,7 +23,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   welcomeMessage.textContent = `Welcome, ${user.username}`;
   user.habits.map((element) => {
     const habitIcon = document.createElement("div");
-    habitIcon.className("habbit-icon");
+    habitIcon.className = "habbit-icon";
     habitIcon.textContent = element.habitType;
     habits.append(habitIcon);
   });

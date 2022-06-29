@@ -4,6 +4,7 @@
   "description": "CHANGELOG * Created a file structure for FD",
   "main": "index.js",
   "scripts": {
+    "dev": "watchify static/js/* -o dist/bundle.js -v",
     "test": "jest --watchAll --verbose --maxWorkers=1",
     "coverage": "jest --coverage --verbose"
   },
@@ -21,5 +22,9 @@
   "devDependencies": {
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1"
+  },
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "watchify": "^4.0.0"
   }
 }

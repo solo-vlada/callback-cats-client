@@ -1,0 +1,441 @@
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+async function requestLogin(e) {
+  e.preventDefault();
+  const username = e.target.username.value;
+  const password = e.target.password.value;
+
+  try {
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    };
+    //UPDATE WITH SERVER LINK
+    const r = await fetch(
+      `https://callback-cats-server.herokuapp.com/users/login`,
+      options
+    );
+    const data = await r.json();
+    if (data.err) {
+      throw Error(data.err);
+    }
+    if (data.success) {
+      sessionStorage.setItem("accesstoken", data.accessToken);
+    }
+    //  login(data);
+  } catch (err) {
+    console.warn(`Error: ${err}`);
+  }
+}
+
+async function requestRegistration(e) {
+  e.preventDefault();
+  const username = e.target.username.value;
+  const email = e.target.email.value;
+  const password = e.target.password.value;
+
+  try {
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+
+      body: JSON.stringify({ username, email, password }),
+    };
+    //UPDATE WITH SERVER LINK
+    const r = await fetch(
+      `https://callback-cats-server.herokuapp.com/users/register`,
+      options
+    );
+    const data = await r.json();
+    if (data.err) {
+      throw Error(data.err);
+    }
+    requestLogin(e);
+  } catch (err) {
+    console.warn(err);
+  }
+}
+
+async function postHabit(e) {
+  e.preventDefault();
+
+  try {
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
+    };
+    //UPDATE WITH SERVER LINK
+    const r = await fetch(
+      // `https://callback-cats-server.herokuapp.com/habits`,
+      "http://localhost:3000/habits",
+      options
+    );
+    const data = await r.json();
+    if (data.err) {
+      throw Error(data.err);
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+}
+
+async function postFrequency(e) {
+  e.preventDefault();
+  try {
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
+    };
+    //UPDATE WITH SERVER LINK
+    const r = await fetch(`http://localhost:3000/users/habits`, options);
+    const data = await r.json();
+    if (data.err) {
+      throw Error(data.err);
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+}
+
+// async function login(data) {
+// 	console.log(data);
+// 	// const payload = jwt_decode(data.token);
+// 	// console.log(payload);
+// 	await localStorage.setItem('token', data.accessToken);
+// 	location.hash = '#dashboard';
+// 	if (data.success) {
+// 		window.location.replace('/dashboard.html');
+// 	}
+// }
+
+function logout() {
+  localStorage.clear();
+  location.hash = "#login";
+}
+
+function currentUser() {
+  const usernme = localStorage.getItem("username");
+  return usernme;
+}
+
+},{}],2:[function(require,module,exports){
+const main = document.querySelector("main");
+const header = document.createElement('h2');
+//const header2 = document.createElement('h2');
+
+
+//Creates a login form
+function renderLoginForm() {
+    const fields =  [
+        {tag:'input', attributes: { type:'text', name:'username', placeholder:'Username' }},
+        {tag:'input', attributes: { type:'password', name:'password', placeholder:'Email' }},
+        {tag:'input', attributes: { type:'submit', value:'Login'}},
+    ];
+    header.textContent = "Login";
+    const form = document.createElement('form');
+    fields.forEach(f => {
+        const field = document.createElement(f.tag);
+        Object.entries(f.attributes).forEach(([a,v]) => field.setAttribute(a,v))
+        form.appendChild(field);
+    })
+    form.addEventListener('submit', requestLogin)
+    main.appendChild(header);
+    main.appendChild(form);
+}
+
+//Creates a registration form 
+function renderRegisterForm() {
+    const fields = [
+        {tag:'input', attributes: { type:'text', name:'username', placeholder:'Username' }},
+        {tag:'input', attributes: { type:'email', name:'email', placeholder:'Email' }},
+        {tag:'input', attributes: { type:'password', name:'password', placeholder:'Password' }},
+        {tag:'input', attributes: { type:'password', name:'passwordConfirmation', placeholder:'Confirm password' }},
+        {tag:'input', attributes: { type:'submit', value:'Create Account'}},
+    ];
+
+    header.textContent = "Register";
+    const form = document.createElement('form');
+    fields.forEach(f => {
+        const field = document.createElement(f.tag);
+        Object.entries(f.attributes).forEach(([a,v]) => field.setAttribute(a,v))
+        form.appendChild(field);
+    });
+    form.addEventListener('submit', requestRegistration)
+    main.appendChild(header);
+    main.appendChild(form);
+}
+
+//Creates a checkbox to choose a habit 
+function renderHabitForm() {
+    let checkboxForm = document.createElement('form');
+    const habits = ['Exercise 30 min', 'Drink 8 glasses of water', 'Get 8 hours of sleep', 'Healthy meal', 'Don\'t smoke', 'Walk the dog'];
+
+    header.textContent = "Choose a habit that you want to practise";
+
+    for (let i = 0; i < habits.length; i++) {
+        let checkBox = document.createElement('input');
+        checkBox.type = 'checkbox';
+        checkBox.id = habits[i];
+        checkBox.name = habits[i];
+        checkBox.value = habits[i];
+
+
+        let label = document.createElement('label');
+        label.htmlFor = habits[i];
+        label.appendChild(document.createTextNode(habits[i]));
+        let br = document.createElement('br');
+    
+        checkboxForm.appendChild(checkBox);
+        checkboxForm.appendChild(label);
+        checkboxForm.appendChild(br);
+        
+    }
+    let button = document.createElement('input');
+    button.setAttribute("type", "submit");
+    checkboxForm.appendChild(button);
+    checkboxForm.addEventListener('submit', postHabit)
+    main.appendChild(header);
+    main.appendChild(checkboxForm);
+
+};
+
+// Createas a checkbox form to choose a frequecy 
+function renderFrequencyForm () {
+    let checkboxForm = document.createElement('form');
+    const frequency = [ 'Hourly', 'Daily', 'Weekly', '3-times a day'];
+
+    header.textContent = "Choose a frequency with which you would like to practice you habit";
+
+    for (let i = 0; i < frequency.length; i++) {
+        let checkBox = document.createElement('input');
+        checkBox.type = 'checkbox';
+        checkBox.id = frequency[i];
+        checkBox.name = frequency[i];
+        checkBox.value = frequency[i];
+
+
+        let label = document.createElement('label');
+        label.htmlFor = frequency[i];
+        label.appendChild(document.createTextNode(frequency[i]));
+        
+        let br = document.createElement('br');
+    
+        checkboxForm.appendChild(checkBox);
+        checkboxForm.appendChild(label);
+        checkboxForm.appendChild(br);
+        
+    }
+    let button = document.createElement('input');
+    button.setAttribute("type", "submit");
+    checkboxForm.appendChild(button);
+    checkboxForm.addEventListener('submit', postFrequency)
+    main.appendChild(header);
+    main.appendChild(checkboxForm);
+}
+
+
+
+
+function render404() {
+    header.textContent = "Oops, we can't find that page sorry!";
+}
+
+
+},{}],3:[function(require,module,exports){
+const switchBtn = document.querySelector(".swap-button");
+const iconContainer = document.querySelector(".habbit-icon-container");
+const completedTrackers = document.querySelector(".completed-trackers");
+const welcomeMessage = document.querySelector(".welcome-message");
+const habits = document.querySelector("#habits");
+const oldHabits = document.querySelector("#oldhabits");
+const getUserData = require("./getUserData");
+
+let trackerState = false;
+let user;
+
+
+window.addEventListener("DOMContentLoaded", async () => {
+  let checkToken = sessionStorage.getItem("accesstoken");
+  if (!checkToken) {
+    return window.location.replace("/");
+  } else {
+    user = await getUserData();
+  }
+  if (!user) {
+    return window.location.replace("/");
+  }
+  welcomeMessage.textContent = `Welcome, ${user.username}`;
+  user.habits.map((element) => {
+    const habitIcon = document.createElement("div");
+    habitIcon.className = "habbit-icon";
+    habitIcon.textContent = element.habitType;
+    habits.append(habitIcon);
+  });
+  console.log(user);
+});
+
+switchBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  trackerState = !trackerState;
+  if (!trackerState) {
+    iconContainer.style.animationName = "slide-in";
+    completedTrackers.style.animationName = "slide-out";
+    switchBtn.textContent = "View Completed";
+    switchBtn.style.animationName = "spin";
+  } else {
+    iconContainer.style.animationName = "slide-out";
+    completedTrackers.style.animationName = "slide-in";
+    switchBtn.textContent = "View in-progress";
+    switchBtn.style.animationName = "unspin";
+  }
+});
+
+// GRAPHS API ////////////////////////////////////////////////////
+
+const ctx = document.querySelector("#canvas-left").getContext("2d");
+
+const labels = ["1", "2", "3", "4", "5", "6", "7"];
+
+const data = {
+  labels,
+  datasets: [
+    {
+      data: [1, 2, 2, 3, 4, 5, 5, 6, 7],
+      label: "Progress This Week",
+    },
+  ],
+};
+
+const config = { type: "line", data, options: { responsive: true } };
+
+const myChart = new Chart(ctx, config);
+
+// GRAPHS API ////////////////////////////////////////////////////
+
+},{"./getUserData":4}],4:[function(require,module,exports){
+const getUserData = async () => {
+  let fetchUserData;
+  const accessToken = sessionStorage.getItem("accesstoken");
+  const userId = jwt_decode(accessToken);
+  const options = new Headers({
+    accesstoken: sessionStorage.getItem("accesstoken"),
+  });
+  try {
+    fetchUserData = await fetch(
+      `https://callback-cats-server.herokuapp.com/users/${userId.id}`,
+      {
+        headers: new Headers({
+          accesstoken: sessionStorage.getItem("accesstoken"),
+        }),
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+
+  let result = await fetchUserData.json();
+  // this line might be wrong
+  return result.data.user;
+};
+
+module.exports = getUserData;
+
+},{}],5:[function(require,module,exports){
+const nav = document.querySelector("nav");
+
+const publicRoutes = ['#', '#login', '#register'];
+const privateRoutes = ['#habit', '#frequency', '#dashboard'];
+
+window.addEventListener('hashchange', updateContent);
+
+function updateNav() {
+    nav.innerHTML = '';
+    let links; 
+    let logoutBtn;
+    links = publicRoutes.map(createNavLink);
+    privateLinks = privateRoutes.map(createNavLink);
+    // if(currentUser()){
+    //     links = privateRoutes.map(createNavLink);
+    //     logoutBtn = document.createElement('button');
+    //     logoutBtn.textContent = 'Logout';
+    //     logoutBtn.onclick = logout;
+    //     nav.appendChild(logoutBtn);
+    // } else {
+    //     links = publicRoutes.map(createNavLink);
+    // }
+        links.forEach(l => nav.insertBefore(l, logoutBtn));
+        privateLinks.forEach(l=> nav.insertBefore(l, logoutBtn));
+    };
+
+
+function updateMain(path) {
+    main.innerHTML = '';
+    if(path) {
+        switch(path) {
+            case '#login':
+                renderLoginForm();
+                break;
+            case '#register':
+                renderRegisterForm();
+                break;
+            case '#habit':
+                renderHabitForm();
+                break;
+            case '#frequency':
+                renderFrequencyForm();
+                break;
+            case '#dashboard':
+                renderDashboard();
+                break;
+            default:
+                render404()
+                break;
+        }
+    } else {
+        main.innerHTML += `
+            <h1 class="title">Develop good habits!</h1>
+            <img class="logo" src="#" alt="logo">
+            <p class="description">Description...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sodales mi a risus fermentum vestibulum. Morbi quis massa facilisis, aliquet dui vel, fermentum metus. Fusce mauris tortor, viverra sit amet mi in, accumsan aliquet tortor.</p>
+        `;
+        }
+    }
+
+function createNavLink(route) {
+    const link = document.createElement('a');
+    link.textContent = route ==='#' ? 'Home' : `${route[1].toUpperCase()}${route.substring(2)}`; 
+    link.href = route;
+    return link;
+}
+
+
+function updateContent() {
+    const path = window.location.hash;
+    updateNav();
+    updateMain(path);
+//     if (privateRoutes.includes(path) && !currentUser()){
+//         window.location.hash = '#';
+//     } else {
+//     updateNav();
+//     updateMain(path);
+// }
+}
+
+updateContent();
+
+},{}],6:[function(require,module,exports){
+async function getAllUsers() {
+    try {
+        //UPDATE WITH SERVER LINKS
+        const options = {headers: new Headers({'Authorization': localStorage.getItem('token')})}
+        const response = await fetch('http://localhost:3000/users', options);
+        const data = await response.json();
+        return data;
+    
+    } catch (err) {
+        console.warn(err);
+    }
+}
+
+},{}]},{},[1,2,3,4,5,6]);
