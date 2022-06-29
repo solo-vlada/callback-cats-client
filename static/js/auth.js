@@ -19,7 +19,7 @@ async function requestLogin(e) {
 			throw Error(data.err);
 		}
 		if (data.success) {
-			localStorage.setItem('accesstoken', data.accessToken);
+			sessionStorage.setItem('accesstoken', data.accessToken);
 		}
 		//  login(data);
 	} catch (err) {
