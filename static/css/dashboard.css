@@ -20,7 +20,13 @@ animation-timing-function: linear;
 
 }
 .welcome-message{
-    display: none;
+    font-size: 12pt;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.4;
+    /* display: none; */
 }
 
 .dashboard-container{
