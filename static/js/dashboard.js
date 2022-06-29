@@ -3,31 +3,11 @@ const iconContainer = document.querySelector(".habbit-icon-container");
 const completedTrackers = document.querySelector(".completed-trackers");
 const welcomeMessage = document.querySelector(".welcome-message");
 const habits = document.querySelector("#habits");
-const oldHabits = document.querySelector("#oldhabits");
+const oldHabits = document.querySelector("#old-habits");
+const getUserData = require("./getUserData");
+
 let trackerState = false;
 let user;
-
-const getUserData = async () => {
-  let fetchData;
-  const accessToken = sessionStorage.getItem("accesstoken");
-  const userId = jwt_decode(accessToken);
-  try {
-    fetchData = await fetch(
-      `https://callback-cats-server.herokuapp.com/users/${userId.id}`,
-      {
-        headers: new Headers({
-          accesstoken: sessionStorage.getItem("accesstoken"),
-        }),
-      }
-    );
-  } catch (err) {
-    console.log(err);
-  }
-
-  let result = await fetchData.json();
-  // this line might be wrong
-  return result.data.user;
-};
 
 window.addEventListener("DOMContentLoaded", async () => {
   let checkToken = sessionStorage.getItem("accesstoken");
@@ -40,13 +20,14 @@ window.addEventListener("DOMContentLoaded", async () => {
     return window.location.replace("/");
   }
   welcomeMessage.textContent = `Welcome, ${user.username}`;
-  user.habits.map((element) => {
+  user.habits.map((element, index) => {
+    if (index > 5) return;
+    // console.log(user.habits);
     const habitIcon = document.createElement("div");
-    habitIcon.className("habbit-icon");
+    habitIcon.className = "habbit-icon";
     habitIcon.textContent = element.habitType;
-    habits.append(habitIcon);
+    !element.completed ? habits.append(habitIcon) : oldHabits.append(habitIcon);
   });
-  console.log(user);
 });
 
 switchBtn.addEventListener("click", (e) => {
@@ -67,22 +48,23 @@ switchBtn.addEventListener("click", (e) => {
 
 // GRAPHS API ////////////////////////////////////////////////////
 
-const ctx = document.querySelector("#canvas-left").getContext("2d");
+const renderChart1 = async () => {
+  const ctx = document.querySelector("#canvas-left").getContext("2d");
+  const labels = [1, 2, 3, 4, 5, 6, 7];
 
-const labels = ["1", "2", "3", "4", "5", "6", "7"];
+  const data = {
+    labels,
+    datasets: [
+      {
+        data: [1, 2, 2, 3, 4, 5, 5, 6, 7],
+        label: "Progress This Week",
+      },
+    ],
+  };
 
-const data = {
-  labels,
-  datasets: [
-    {
-      data: [1, 2, 2, 3, 4, 5, 5, 6, 7],
-      label: "Progress This Week",
-    },
-  ],
+  const config = { type: "bar", data, options: { responsive: true } };
+
+  const myChart = new Chart(ctx, config);
 };
-
-const config = { type: "line", data, options: { responsive: true } };
-
-const myChart = new Chart(ctx, config);
 
 // GRAPHS API ////////////////////////////////////////////////////

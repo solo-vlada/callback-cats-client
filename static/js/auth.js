@@ -7,8 +7,10 @@ async function requestLogin(e) {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      mode: "cors",
       body: JSON.stringify({ username, password }),
     };
+    //UPDATE WITH SERVER LINK
     const r = await fetch(
       `https://callback-cats-server.herokuapp.com/users/login`,
       options
@@ -43,6 +45,7 @@ async function requestRegistration(e) {
 
       body: JSON.stringify({ username, email, password }),
     };
+    //UPDATE WITH SERVER LINK
     const r = await fetch(
       `https://callback-cats-server.herokuapp.com/users/register`,
       options
