@@ -27,6 +27,9 @@ async function requestLogin(e) {
   }
 }
 
+const registerForm = document.querySelector('#registerForm');
+
+
 async function requestRegistration(e) {
   e.preventDefault();
   const username = e.target.username.value;
@@ -53,6 +56,12 @@ async function requestRegistration(e) {
     console.warn(err);
   }
 }
+
+registerForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  requestRegistration(e);
+  window.location.replace("/habit.html");
+});
 
 //REMOVE CODE BELOW
 // async function postFrequency(e) {

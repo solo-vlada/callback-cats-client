@@ -109,5 +109,6 @@ async function postHabit(e) {
 habitForm.addEventListener("submit", (e) => {
   e.preventDefault();
   postHabit(e);
+
 });
 //  habit form /////////////////////////////////////////////
