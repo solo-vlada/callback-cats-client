@@ -48,7 +48,7 @@ function updateMain(path) {
     } else {
         main.innerHTML += `
             <h1 class="title">Develop good habits!</h1>
-            <img class="logo" src="#" alt="logo">
+            <img class="logo" src="/static/img/habits-hero.png" alt="logo">
             <p class="description">Description...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sodales mi a risus fermentum vestibulum. Morbi quis massa facilisis, aliquet dui vel, fermentum metus. Fusce mauris tortor, viverra sit amet mi in, accumsan aliquet tortor.</p>
         `;
         }
