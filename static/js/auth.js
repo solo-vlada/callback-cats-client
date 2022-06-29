@@ -1,3 +1,7 @@
+
+const loginForm = document.querySelector('#loginForm');
+const registerForm = document.querySelector('#registerForm');
+
 async function requestLogin(e) {
   e.preventDefault();
   const username = e.target.username.value;
@@ -29,7 +33,10 @@ async function requestLogin(e) {
   }
 }
 
-const registerForm = document.querySelector('#registerForm');
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  requestLogin(e);
+});
 
 
 async function requestRegistration(e) {
@@ -66,6 +73,8 @@ registerForm.addEventListener("submit", (e) => {
   window.location.replace("/habit.html");
 });
 
+
+
 //REMOVE CODE BELOW
 // async function postFrequency(e) {
 // 	e.preventDefault();
@@ -98,13 +107,13 @@ registerForm.addEventListener("submit", (e) => {
 // 	}
 // }
 
-function logout() {
-  localStorage.clear();
-  location.hash = "#login";
-}
+// function logout() {
+//   localStorage.clear();
+//   location.hash = "#login";
+// }
 
 //REMOVE THIS CODE
-function currentUser() {
-  const usernme = localStorage.getItem("username");
-  return usernme;
-}
+// function currentUser() {
+//   const usernme = localStorage.getItem("username");
+//   return usernme;
+// }
