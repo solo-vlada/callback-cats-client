@@ -9,7 +9,6 @@ async function requestLogin(e) {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ username, password }),
 		};
-		//UPDATE WITH SERVER LINK
 		const r = await fetch(
 			`https://callback-cats-server.herokuapp.com/users/login`,
 			options
@@ -20,6 +19,7 @@ async function requestLogin(e) {
 		}
 		if (data.success) {
 			sessionStorage.setItem('accesstoken', data.accessToken);
+      window.location.replace('/dashboard.html');
 		}
 		//  login(data);
 	} catch (err) {
@@ -40,7 +40,6 @@ async function requestRegistration(e) {
 
 			body: JSON.stringify({ username, email, password }),
 		};
-		//UPDATE WITH SERVER LINK
 		const r = await fetch(
 			`https://callback-cats-server.herokuapp.com/users/register`,
 			options
@@ -66,37 +65,41 @@ async function postHabit(e) {
 		};
 		//UPDATE WITH SERVER LINK
 		const r = await fetch(
-			`https://callback-cats-server.herokuapp.com/users/login`,
+			`https://callback-cats-server.herokuapp.com/users/habit`,
 			options
 		);
 		const data = await r.json();
 		if (data.err) {
 			throw Error(data.err);
 		}
+		window.location.replace('/dashboard.html');
+
 	} catch (err) {
 		console.warn(err);
 	}
 }
 
-async function postFrequency(e) {
-	e.preventDefault();
-	try {
-		const options = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
-		};
-		//UPDATE WITH SERVER LINK
-		const r = await fetch(`http://localhost:3000/users/habits`, options);
-		const data = await r.json();
-		if (data.err) {
-			throw Error(data.err);
-		}
-	} catch (err) {
-		console.warn(err);
-	}
-}
+//REMOVE CODE BELOW 
+// async function postFrequency(e) {
+// 	e.preventDefault();
+// 	try {
+// 		const options = {
+// 			method: 'POST',
+// 			headers: { 'Content-Type': 'application/json' },
+// 			body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
+// 		};
+// 		//UPDATE WITH SERVER LINK
+// 		const r = await fetch(`http://localhost:3000/users/habits`, options);
+// 		const data = await r.json();
+// 		if (data.err) {
+// 			throw Error(data.err);
+// 		}
+// 	} catch (err) {
+// 		console.warn(err);
+// 	}
+// }
 
+//REMOVE THIS CODE
 // async function login(data) {
 // 	console.log(data);
 // 	// const payload = jwt_decode(data.token);
@@ -113,6 +116,7 @@ function logout() {
 	location.hash = '#login';
 }
 
+//REMOVE THIS CODE
 function currentUser() {
 	const usernme = localStorage.getItem('username');
 	return usernme;

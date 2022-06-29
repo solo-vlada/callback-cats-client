@@ -1,6 +1,6 @@
 const main = document.querySelector("main");
 const header = document.createElement('h2');
-//const header2 = document.createElement('h2');
+const header2 = document.createElement('h2');
 
 
 //Creates a login form
@@ -72,7 +72,7 @@ function renderHabitForm() {
     let button = document.createElement('input');
     button.setAttribute("type", "submit");
     checkboxForm.appendChild(button);
-    checkboxForm.addEventListener('submit', postHabit)
+    checkboxForm.addEventListener('submit', renderFrequencyForm)
     main.appendChild(header);
     main.appendChild(checkboxForm);
 
@@ -83,7 +83,7 @@ function renderFrequencyForm () {
     let checkboxForm = document.createElement('form');
     const frequency = [ 'Hourly', 'Daily', 'Weekly', '3-times a day'];
 
-    header.textContent = "Choose a frequency with which you would like to practice you habit";
+    header2.textContent = "Choose a frequency with which you would like to practice you habit";
 
     for (let i = 0; i < frequency.length; i++) {
         let checkBox = document.createElement('input');
@@ -107,12 +107,10 @@ function renderFrequencyForm () {
     let button = document.createElement('input');
     button.setAttribute("type", "submit");
     checkboxForm.appendChild(button);
-    checkboxForm.addEventListener('submit', postFrequency)
-    main.appendChild(header);
+    checkboxForm.addEventListener('submit', postHabit);
+    main.appendChild(header2);
     main.appendChild(checkboxForm);
 }
-
-
 
 
 function render404() {
