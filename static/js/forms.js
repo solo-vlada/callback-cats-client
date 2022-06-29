@@ -82,7 +82,10 @@ async function postHabit(e) {
   try {
     const options = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: new Headers({
+        "Content-Type": "application/json",
+        accesstoken: sessionStorage.getItem("accesstoken"),
+      }),
       body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
     };
     //UPDATE WITH SERVER LINK
@@ -95,7 +98,7 @@ async function postHabit(e) {
     const data = await r.json();
 
     if (data.err) {
-      window.location.replace("/habit.html");
+      console.log(data.err);
       throw Error(data.err);
     }
   } catch (err) {
