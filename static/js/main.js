@@ -1,5 +1,9 @@
 const { getUserData } = require("./getUserData");
 
+if (window.location === "/habit.html") {
+  user ? console.log("user logged in") : console.log("user is not logged in.");
+}
+
 let user;
 window.addEventListener("DOMContentLoaded", async () => {
   let checkToken = sessionStorage.getItem("accesstoken");

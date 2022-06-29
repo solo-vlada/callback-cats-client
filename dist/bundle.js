@@ -22,6 +22,7 @@ async function requestLogin(e) {
     }
     if (data.success) {
       sessionStorage.setItem("accesstoken", data.accessToken);
+      window.location.replace("/dashboard.html");
     }
     //  login(data);
   } catch (err) {
@@ -57,49 +58,27 @@ async function requestRegistration(e) {
   }
 }
 
-async function postHabit(e) {
-  e.preventDefault();
+//REMOVE CODE BELOW
+// async function postFrequency(e) {
+// 	e.preventDefault();
+// 	try {
+// 		const options = {
+// 			method: 'POST',
+// 			headers: { 'Content-Type': 'application/json' },
+// 			body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
+// 		};
+// 		//UPDATE WITH SERVER LINK
+// 		const r = await fetch(`http://localhost:3000/users/habits`, options);
+// 		const data = await r.json();
+// 		if (data.err) {
+// 			throw Error(data.err);
+// 		}
+// 	} catch (err) {
+// 		console.warn(err);
+// 	}
+// }
 
-  try {
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
-    };
-    //UPDATE WITH SERVER LINK
-    const r = await fetch(
-      // `https://callback-cats-server.herokuapp.com/habits`,
-      "http://localhost:3000/habits",
-      options
-    );
-    const data = await r.json();
-    if (data.err) {
-      throw Error(data.err);
-    }
-  } catch (err) {
-    console.warn(err);
-  }
-}
-
-async function postFrequency(e) {
-  e.preventDefault();
-  try {
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
-    };
-    //UPDATE WITH SERVER LINK
-    const r = await fetch(`http://localhost:3000/users/habits`, options);
-    const data = await r.json();
-    if (data.err) {
-      throw Error(data.err);
-    }
-  } catch (err) {
-    console.warn(err);
-  }
-}
-
+//REMOVE THIS CODE
 // async function login(data) {
 // 	console.log(data);
 // 	// const payload = jwt_decode(data.token);
@@ -116,6 +95,7 @@ function logout() {
   location.hash = "#login";
 }
 
+//REMOVE THIS CODE
 function currentUser() {
   const usernme = localStorage.getItem("username");
   return usernme;
@@ -124,7 +104,7 @@ function currentUser() {
 },{}],2:[function(require,module,exports){
 const main = document.querySelector("main");
 const header = document.createElement('h2');
-//const header2 = document.createElement('h2');
+const header2 = document.createElement('h2');
 
 
 //Creates a login form
@@ -196,7 +176,7 @@ function renderHabitForm() {
     let button = document.createElement('input');
     button.setAttribute("type", "submit");
     checkboxForm.appendChild(button);
-    checkboxForm.addEventListener('submit', postHabit)
+    checkboxForm.addEventListener('submit', renderFrequencyForm)
     main.appendChild(header);
     main.appendChild(checkboxForm);
 
@@ -207,7 +187,7 @@ function renderFrequencyForm () {
     let checkboxForm = document.createElement('form');
     const frequency = [ 'Hourly', 'Daily', 'Weekly', '3-times a day'];
 
-    header.textContent = "Choose a frequency with which you would like to practice you habit";
+    header2.textContent = "Choose a frequency with which you would like to practice you habit";
 
     for (let i = 0; i < frequency.length; i++) {
         let checkBox = document.createElement('input');
@@ -231,12 +211,10 @@ function renderFrequencyForm () {
     let button = document.createElement('input');
     button.setAttribute("type", "submit");
     checkboxForm.appendChild(button);
-    checkboxForm.addEventListener('submit', postFrequency)
-    main.appendChild(header);
+    checkboxForm.addEventListener('submit', postHabit);
+    main.appendChild(header2);
     main.appendChild(checkboxForm);
 }
-
-
 
 
 function render404() {
@@ -317,7 +295,122 @@ const renderChart1 = async () => {
 
 // GRAPHS API ////////////////////////////////////////////////////
 
-},{"./getUserData":4}],4:[function(require,module,exports){
+},{"./getUserData":5}],4:[function(require,module,exports){
+// dom variables
+const msf_getFsTag = document.getElementsByTagName("fieldset");
+
+// declaring the active fieldset & the total fieldset count
+let msf_form_nr = 0;
+let fieldset = msf_getFsTag[msf_form_nr];
+fieldset.className = "msf_show";
+
+// creates and stores a number of bullets
+let msf_bullet_nr = "<div class='msf_bullet'></div>";
+let msf_length = msf_getFsTag.length;
+for (let i = 1; i < msf_length; ++i) {
+  msf_bullet_nr += "<div class='msf_bullet'></div>";
+}
+// injects bullets
+let msf_bullet_o = document.getElementsByClassName("msf_bullet_o");
+for (let i = 0; i < msf_bullet_o.length; ++i) {
+  let msf_b_item = msf_bullet_o[i];
+  msf_b_item.innerHTML = msf_bullet_nr;
+}
+
+// removes the first back button & the last next button
+//document.getElementsByName("back")[0].className = "msf_hide";
+// document.getElementsByName("next")[msf_bullet_o.length - 1].className = "msf_hide";
+
+// Makes the first dot active
+let msf_bullets = document.getElementsByClassName("msf_bullet");
+msf_bullets[msf_form_nr].className += " msf_bullet_active";
+
+// Validation loop & goes to the next step
+function msf_btn_next() {
+  let msf_val = true;
+
+  let msf_fs = document.querySelectorAll("fieldset")[msf_form_nr];
+  let msf_fs_i_count = msf_fs.querySelectorAll("input").length;
+
+  for (i = 0; i < msf_fs_i_count; ++i) {
+    let msf_input_s = msf_fs.querySelectorAll("input")[i];
+    if (msf_input_s.getAttribute("type") === "button") {
+      // nothing happens
+    } else {
+      if (msf_input_s.value === "") {
+        msf_input_s.style.backgroundColor = "pink";
+        msf_val = false;
+      } else {
+        if (msf_val === false) {
+        } else {
+          msf_val = true;
+          msf_input_s.style.backgroundColor = "lime";
+        }
+      }
+    }
+  }
+  if (msf_val === true) {
+    // goes to the next step
+    var selection = msf_getFsTag[msf_form_nr];
+    selection.className = "msf_hide";
+    msf_form_nr = msf_form_nr + 1;
+    var selection = msf_getFsTag[msf_form_nr];
+    selection.className = "msf_show";
+    // refreshes the bullet
+    var msf_bullets_a = msf_form_nr * msf_length + msf_form_nr;
+    msf_bullets[msf_bullets_a].className += " msf_bullet_active";
+  }
+}
+
+// goes one step back
+function msf_btn_back() {
+  msf_getFsTag[msf_form_nr].className = "msf_hide";
+  msf_form_nr = msf_form_nr - 1;
+  msf_getFsTag[msf_form_nr].className = "msf_show";
+}
+
+console.log("loaded");
+
+//  habit form /////////////////////////////////////////////
+const habitForm = document.querySelector("#habit-form");
+
+async function postHabit(e) {
+  e.preventDefault();
+
+  try {
+    const options = {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        accesstoken: sessionStorage.getItem("accesstoken"),
+      }),
+      body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
+    };
+    //UPDATE WITH SERVER LINK
+    const r = await fetch(
+      //   `https://callback-cats-server.herokuapp.com/habits`,
+      "http://localhost:3000/habits",
+      options
+    );
+    console.log("submitted to front end");
+    const data = await r.json();
+
+    if (data.err) {
+      console.log(data.err);
+      throw Error(data.err);
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+}
+
+habitForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  postHabit(e);
+});
+//  habit form /////////////////////////////////////////////
+
+},{}],5:[function(require,module,exports){
 const getUserData = async () => {
   let fetchUserData;
   const accessToken = sessionStorage.getItem("accesstoken");
@@ -347,11 +440,11 @@ const getUserData = async () => {
 
 module.exports = getUserData;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 const nav = document.querySelector("nav");
 
 const publicRoutes = ['#', '#login', '#register'];
-const privateRoutes = ['#habit', '#frequency', '#dashboard'];
+const privateRoutes = ['#new-habit', '#dashboard'];
 
 window.addEventListener('hashchange', updateContent);
 
@@ -385,11 +478,8 @@ function updateMain(path) {
             case '#register':
                 renderRegisterForm();
                 break;
-            case '#habit':
+            case '#new-habit':
                 renderHabitForm();
-                break;
-            case '#frequency':
-                renderFrequencyForm();
                 break;
             case '#dashboard':
                 renderDashboard();
@@ -429,8 +519,12 @@ function updateContent() {
 
 updateContent();
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 const { getUserData } = require("./getUserData");
+
+if (window.location === "/habit.html") {
+  user ? console.log("user logged in") : console.log("user is not logged in.");
+}
 
 let user;
 window.addEventListener("DOMContentLoaded", async () => {
@@ -456,12 +550,12 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 module.exports = user;
 
-},{"./getUserData":4}],7:[function(require,module,exports){
+},{"./getUserData":5}],8:[function(require,module,exports){
 async function getAllUsers() {
     try {
-        //UPDATE WITH SERVER LINKS
+        //UPDATE WITH SERVER LINK
         const options = {headers: new Headers({'Authorization': localStorage.getItem('token')})}
-        const response = await fetch('http://localhost:3000/users', options);
+        const response = await fetch('https://callback-cats-server.herokuapp.com/users', options);
         const data = await response.json();
         return data;
     
@@ -470,4 +564,4 @@ async function getAllUsers() {
     }
 }
 
-},{}]},{},[1,2,3,4,5,6,7]);
+},{}]},{},[1,2,3,4,5,6,7,8]);

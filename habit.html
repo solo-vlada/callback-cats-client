@@ -8,44 +8,45 @@
     <link rel="stylesheet" href="./static/css/index.css">
     <link rel="stylesheet" href="./static/css/form.css">
     <link rel="icon" href="./static/img/favicon.png">
+    <script defer src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"></script>
     <script defer src ='/static/js/auth.js'></script>
     <script defer src="/static/js/content.js"></script>
     <!-- <script defer src="/static/js/layout.js"></script> -->
     <script defer src="/static/js/forms.js"></script>
-   
-</head>
-<body>
+    
+  </head>
+  <body>
     <form id="habit-form" class="form_wrapper">
-        <fieldset class="msf_hide">
-            <h2>Choose a habit that you want to practise</h2>
-          <div>
-            <input type="radio" id="habit1"name="habit" value="habit1">
-            <label for="habit1">Exercise 30 min</label><br>
-            <input type="radio" id="habit2" name="habit" value="habit2">
-            <label for="habit2">Drink 8 glasses of water</label><br>
-            <input type="radio" id="habit3" name="habit" value="habit3">
-            <label for="habit3"> Get 8 hours of sleep</label><br>
-            <input type="radio" id="habit4" name="habit" value="habit4"> 
-            <label for="habit4">Healthy meal</label><br>
-            <input type="radio"  id="habit5 "name="habit" value="habit5">
-            <label for="habit5"> Don't smoke</label><br>
-            <input type="radio" name="habit" value="habit6">
-            <label for="habit6">Walk the dog</label><br>
-          </div>
-            <input type="button" name="next" value="Next"  onclick="msf_btn_next()">
-          <div class="msf_bullet_o"></div>
-        </fieldset>
-        
-        <fieldset class="msf_hide">
-            <h2>Choose a frequency with which you would like to practice your habit</h2>
-            <div> 
-                <input type="radio" id="frequency1" name="frequency" value="hourly">
-                <label for="frequency1">Hourly</label><br>
-                <input type="radio"  id="frequency2" name="frequency" value="daily">
-                <label for="frequency2">Daily</label><br>
-                <input type="radio" id="frequency3" name="frequency" value="weekly">
-                <label for="frequency3"> Weekly</label><br>
-                <input type="radio" id="frequency4" name="frequency" value="3-times"> 
+      <fieldset class="msf_hide">
+        <h2>Choose a habit that you want to practise</h2>
+        <div>
+          <input type="radio" id="habit1"name="habit" value="habit1">
+          <label for="habit1">Exercise 30 min</label><br>
+          <input type="radio" id="habit2" name="habit" value="habit2">
+          <label for="habit2">Drink 8 glasses of water</label><br>
+          <input type="radio" id="habit3" name="habit" value="habit3">
+          <label for="habit3"> Get 8 hours of sleep</label><br>
+          <input type="radio" id="habit4" name="habit" value="habit4"> 
+          <label for="habit4">Healthy meal</label><br>
+          <input type="radio"  id="habit5 "name="habit" value="habit5">
+          <label for="habit5"> Don't smoke</label><br>
+          <input type="radio" name="habit" value="habit6">
+          <label for="habit6">Walk the dog</label><br>
+        </div>
+        <input type="button" name="next" value="Next"  onclick="msf_btn_next()">
+        <div class="msf_bullet_o"></div>
+      </fieldset>
+      
+      <fieldset class="msf_hide">
+        <h2>Choose a frequency with which you would like to practice your habit</h2>
+        <div> 
+          <input type="radio" id="frequency1" name="frequency" value="hourly">
+          <label for="frequency1">Hourly</label><br>
+          <input type="radio"  id="frequency2" name="frequency" value="daily">
+          <label for="frequency2">Daily</label><br>
+          <input type="radio" id="frequency3" name="frequency" value="weekly">
+          <label for="frequency3"> Weekly</label><br>
+          <input type="radio" id="frequency4" name="frequency" value="3-times"> 
                 <label for="frequency4"> 3-times a day</label><br>
              </div>   
             <input type="button" name="back" value="Back"  onclick="msf_btn_back()">
@@ -53,5 +54,6 @@
           <div class="msf_bullet_o"></div>
         </fieldset>
     </form>
+    <script defer src="./dist/bundle.js"></script>
 </body>
 </html>

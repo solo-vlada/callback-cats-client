@@ -9,28 +9,6 @@ const getUserData = require("./getUserData");
 let trackerState = false;
 let user;
 
-const getUserData = async () => {
-  let fetchData;
-  const accessToken = sessionStorage.getItem("accesstoken");
-  const userId = jwt_decode(accessToken);
-  try {
-    fetchData = await fetch(
-      `https://callback-cats-server.herokuapp.com/users/${userId.id}`,
-      {
-        headers: new Headers({
-          accesstoken: sessionStorage.getItem("accesstoken"),
-        }),
-      }
-    );
-  } catch (err) {
-    console.log(err);
-  }
-
-  let result = await fetchData.json();
-  // this line might be wrong
-  return result.data.user;
-};
-
 window.addEventListener("DOMContentLoaded", async () => {
   let checkToken = sessionStorage.getItem("accesstoken");
   if (!checkToken) {
