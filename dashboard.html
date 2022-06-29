@@ -6,40 +6,30 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="./static/css/dashboard.css" />
     <link rel="icon" href="./static/img/favicon.png">
-		<script
-			defer
-			src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"
-		></script>
-		<script defer src="./static/js/dashboard.js"></script>
+	<script defer src="./dist/bundle.js"></script>
 	<script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
-		integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script
+		defer
+		src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"
+	></script>
 
 		<title>Dashboard</title>
 	</head>
 	<body>
 		<div class="dashboard-container">
-			<h1 class="welcome-message">Hello, User</h1>
+			<h1 class="welcome-message">Loading...</h1>
 			<!-- this button will switch between current trackers and completed trackers -->
 			<div class="btn-container">
 				<button class="swap-button btn">View Completed</button>
 			</div>
 			<!-- this is the circular icons for each habbit -->
 			<div id="habits" class="habbit-icon-container">
-				<div class="habbit-icon">habbit 1</div>
-				<div class="habbit-icon">habbit 2</div>
-				<div class="habbit-icon">habbit 3</div>
-				<div class="habbit-icon">habbit 4</div>
-				<div class="habbit-icon">habbit 5</div>
-				<div class="habbit-icon">habbit 6</div>
+				
 			</div>
 			<div id="old-habits" class="completed-trackers habbit-icon-container">
-				<div class="habbit-icon">old habbit 1</div>
-				<div class="habbit-icon">old habbit 2</div>
-				<div class="habbit-icon">old habbit 3</div>
-				<div class="habbit-icon">old habbit 4</div>
-				<div class="habbit-icon">old habbit 5</div>
-				<div class="habbit-icon">oldhabbit 6</div>
+				
 			</div>
 			<div class="stats-container">
 				<button class="stats-button btn">Stats</button>
