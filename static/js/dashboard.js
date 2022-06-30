@@ -41,7 +41,7 @@ const habitFormatter = (num) => {
     case 6:
       return (habitType = {
         title: "Walk the dog",
-        class: "fa-solid fa-dog-leashed",
+        class: "fa-solid fa-dog",
       });
       break;
     default:
