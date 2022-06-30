@@ -4,16 +4,17 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="./static/img/favicon.png">
+		<script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+		integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script
+		defer
+		src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"
+		></script>
+		<script defer src="https://kit.fontawesome.com/7e4367fc7b.js" crossorigin="anonymous"></script>
+		<script defer src="./static/js/dashboard.js"></script>
 		<link rel="stylesheet" href="./static/css/dashboard.css" />
-    <link rel="icon" href="./static/img/favicon.png">
-	<script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
-	integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script
-	defer
-	src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"
-	></script>
-	<script defer src="./static/js/dashboard.js"></script>
 
 		<title>Dashboard</title>
 	</head>
@@ -34,11 +35,27 @@
 			</div>
 			<div class="stats-container">
 				<button class="stats-button btn">Stats</button>
-				<div class="stats-board">
-					<ul class="stats">
+
+<!-- default view: shows overview of user and habits -->
+<div id="user-overview">
+
+<div class="completed-stats">
+			<p id="overall-habits">Overall: 0</p>
+			<p id="active-count">Active: 0</p>
+			<p id="completed-count">Completed: 0</p>
+</div>
+ <div id="completed-chart-container">
+	<canvas id="completed-chart"></canvas>
+ </div>
+	
+</div>
+				<!-- default: hidden => populated when single habit is clicked on -->
+				<div id="single-habit-view">
+					<div class="stats-board">
+						<ul class="stats">
 						<li class="streak-statistics">
 							<p>Streaks:</p>
-							<div class="streaks-count"><p>4</p></div>
+							<div class="streaks-count"><p class="streaks-count-p">4</p></div>
 						</li>
 						<li class="completion-statistics">
 							<p>Completeion:</p>
@@ -55,6 +72,10 @@
 					</div>
 					<div class="calendar-statistics"></div>
 				</div>
+			</div>
+		</div>
+			<div class="logout-button-container">
+				<button class="logout-button">log out</button>
 			</div>
 		</div>
 			<footer>
