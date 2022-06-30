@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./static/css/form.css">
     <link rel="icon" href="./static/img/favicon.png">
     <script defer src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"> -->
+  </head>
     <script defer src ='/static/js/auth.js'></script>
     <script defer src="/static/js/content.js"></script>
     <!-- REMOVE LINK BELOW -->
@@ -17,6 +19,29 @@
    
 </head>
 <body>
+  <nav>
+    <!-- <a id="nav-link" href = "" class="navLink" data-bs-toggle="modal" data-bs-target="#registerForm">Get started!</a>
+    <a id="nav-link" class="navLink" href="" data-bs-toggle="modal" data-bs-target="#loginForm">Login</a> -->
+    <a id="nav-link"  class="navLink" href="/index.html"> Home</a>
+    <a id="nav-link"  class="navLink" href="/habit.html"> Create Habit</a>
+    <a id="nav-link"  class="navLink" href="/dashboard.html">Dashboard</a>
+    <a id="nav-link"  class="logout navLink" href="">Logout</a>
+    <div class="burger">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </nav>
+  <div  id="dropdown-menu">
+            <!-- <a class="nav-link drop-down-link" href="" data-bs-toggle="modal" data-bs-target="#registerForm">Get started!</a>
+            <a class="navLink drop-down-link" href="" data-bs-toggle="modal" data-bs-target="#loginForm">Login</a> -->
+            <a class="navLink drop-down-link" href="/habit.html"> Create Habit</a>
+            <a class="navLink drop-down-link" href="/dashboard.html">Dashboard</a>
+  </div>
+  <main>
+    <h1>Create a habit</h1>
+    <section class="form-position">
     <form id="habit-form" class="form_wrapper">
       <fieldset class="msf_hide">
         <h2>Choose a habit that you want to practise</h2>
@@ -29,9 +54,11 @@
           <label for="habit3"> Get 8 hours of sleep</label><br>
           <input type="radio" id="habit4" name="habit" value=4> 
           <label for="habit4">Healthy meal</label><br>
+
           <input type="radio"  id="habit5 "name="habit" value=5>
           <label for="habit5"> Don't smoke</label><br>
           <input type="radio" name="habit" value=6>
+
           <label for="habit6">Walk the dog</label><br>
         </div>
         <input type="button" name="next" value="Next"  onclick="msf_btn_next()">
@@ -39,7 +66,7 @@
       </fieldset>
       
       <fieldset class="msf_hide">
-        <h2>Choose a frequency with which you would like to practice your habit</h2>
+        <h2>Choose a frequency to practice your habit</h2>
         <div> 
           <input type="radio" id="frequency1" name="frequency" value="1">
           <label for="frequency1">Hourly</label><br>
@@ -55,6 +82,11 @@
           <div class="msf_bullet_o"></div>
         </fieldset>
     </form>
+    </section>
+  </main>
+  <footer>
+    <p>Created by  <a href="https://github.com/TommyHacker">Tom</a> 😼, <a href="https://github.com/CrookedTimber">Edgar</a> 😼 & <a href="https://github.com/solo-vlada">Vlada</a> 😼</p>
+  </footer>
     <script defer src="./dist/bundle.js"></script>
 </body>
 </html>
