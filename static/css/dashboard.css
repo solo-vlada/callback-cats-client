@@ -11,6 +11,7 @@ display: none;
 
 body{
     overflow-x: hidden;
+    background-color: #FFF7EC;
 }
 
 .swap-button{
@@ -83,9 +84,9 @@ color: black;
     min-height: 200px;
     
 }
-.habbit-icon{
-    height: 120px;
-    width: 120px;
+.habit-icon{
+    height: 160px;
+    width: 160px;
     border-radius: 50%;
     margin:10px;
     display: flex;
@@ -98,6 +99,7 @@ color: black;
     color: black;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.437);
     z-index: 51;
+    overflow: hidden;
 }
 
 .stats-container{
@@ -161,7 +163,59 @@ padding: 10px;
     margin: 40px auto;
 }
 
+#single-habit-view{
+    display: flex;
+    min-height: 600px ;
+    width: 100%;
+}
+#user-overview{
+    background: #FFF7EC;
+    color: #035C42;
+    overflow-x: hidden;
+    height: auto;
+    width: 100%;
+    font-size: 14pt;
+    justify-content: space-around;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#overall-habits , #active-count, #completed-count{
+    text-align: center;
+    height: min-content;
+    padding: 10px;
+    min-width: 100px;
+    box-shadow: 0px 0px 3px rgba(128, 128, 128, 0.312);
+}
+i {
+    margin: 0;
+    font-size: 40pt;
+}
+
+#completed-chart-container {
+    width: 100%;
+}
+
+.completed-stats{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
 @media only screen and (min-width:768px){
+    .completed-stats {
+        margin: 4rem 0;
+    }
+    #overall-habits,
+        #active-count,
+        #completed-count {
+            padding: 20px;
+            min-width: 200px;
+            box-shadow: 0px 0px 3px rgba(128, 128, 128, 0.312);
+        }
     .chart-statistics-left {
             height: 100px;
             width: 100%;
@@ -173,7 +227,7 @@ padding: 10px;
         width: 200px;
         font-size: 16pt;
     }
-    .habbit-icon{
+    .habit-icon{
         height: 250px;
         width: 250px;
         margin: 20px;
@@ -196,7 +250,14 @@ padding: 10px;
         .habbit-icon-container{
             min-height: 500px;
         }
+        i{
+            font-size: 70pt;
+        }
+                #completed-chart-container {
+                    width: 40%;
+                }
 }
+
 
 
 
