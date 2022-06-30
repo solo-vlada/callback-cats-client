@@ -1,7 +1,7 @@
 
 const loginForm = document.querySelector('#loginForm');
 const registerForm = document.querySelector('#registerForm');
-const lgtBtn = document.querySelector(".logout");
+
 
 
 async function requestLogin(e) {
@@ -25,10 +25,9 @@ async function requestLogin(e) {
     if (data.err) {
       throw Error(data.err);
     }
-    console.log(data);
     if (data.success) {
       sessionStorage.setItem("accesstoken", data.accessToken);
-      window.location.replace("/dashboard.html");
+      // window.location.replace("/dashboard.html");
     }
     //  login(data);
   } catch (err) {
@@ -36,9 +35,10 @@ async function requestLogin(e) {
   }
 }
 
-loginForm.addEventListener("submit", (e) => {
+loginForm.addEventListener("submit", async (e) =>  {
   e.preventDefault();
-  requestLogin(e);
+  let result = await requestLogin(e);
+  window.location.replace("/dashboard.html");
 });
 
 async function requestRegistration(e) {
@@ -60,10 +60,15 @@ async function requestRegistration(e) {
       options
     );
     const data = await r.json();
+    console.log(data);
+    console.log(typeof data.status);
     if (data.err) {
       throw Error(data.err);
     }
-    await requestLogin(e);
+    if (data.status === 201) {
+      let result = await requestLogin(e);
+      window.location.replace("/habit.html");
+    }
   } catch (err) {
     console.warn(err);
   }
@@ -71,17 +76,10 @@ async function requestRegistration(e) {
 
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  await requestRegistration(e);
-  window.location.replace("/habit.html");
+  requestRegistration(e);
+  //const result = await requestLogin(e);
+  // window.location.replace("/habit.html");
+
 });
 
-
-
-lgtBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  window.location.replace("/index.html");
-  localStorage.clear();
-  sessionStorage.clear("accesstoken");
-  
-});
 

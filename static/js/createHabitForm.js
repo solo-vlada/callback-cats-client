@@ -115,5 +115,6 @@ async function postHabit(e) {
 habitForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const result = await postHabit(e);
+  window.location.replace("dashboard.html");
 });
 //  habit form /////////////////////////////////////////////
