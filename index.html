@@ -40,43 +40,68 @@
         <img class="logo" src="/static/img/habits-hero.png" alt="logo">
         <p class="description">Description...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sodales mi a risus fermentum vestibulum. Morbi quis massa facilisis, aliquet dui vel, fermentum metus. Fusce mauris tortor, viverra sit amet mi in, accumsan aliquet tortor.</p>
      </main>
-     <!-- Modal Login Form -->
+     <!-- Modal Register Form -->
      <form
-class="modal fade"
-id="registerForm"
-tabindex="-1"
-aria-labelledby="exampleModalLabel"
-aria-hidden="true"
->
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Register</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-     <label for="username">Username</label>
-      <input type="text" class="form-control" name="username" id="username" />
-      <br />
-      <label for="email">Your email</label>
-      <input type="email" class="form-control" name="email" id="email" />
-      <br />
-      <label for="password">Create password</label>
-      <input type="password" class="form-control" name="password" id="password" />
-    </br />
-     <label for="confirmPassword">Confirm password</label>
-    <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" />
-  </br />
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-        Close
-      </button>
-      <button type="submit" id="add" class="btn btn-primary">Submit</button>
-    </div>
-  </div>
-</div>
-</form>
+        class="modal fade"
+        id="registerForm"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+        >
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" name="username" id="username" required/>
+            <br />
+            <label for="email">Your email</label>
+            <input type="email" class="form-control" name="email" id="email" required/>
+            <br />
+            <label for="password">Create password</label>
+            <input type="password" class="form-control" name="password" id="password" required />
+            </br />
+            <label for="confirmPassword">Confirm password</label>
+            <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" required />
+        </br />
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Close
+            </button>
+            <button type="submit" id="register" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+        </div>
+    </form>
+     <!-- Modal Login Form -->
+     <form class="modal fade" id="loginForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <label for="enterUsername">Username</label>
+            <input type="text" class="form-control" name="username" id="enterUsername" required/>
+            <br />
+            <label for="enterPassword">Password</label>
+            <input type="password" class="form-control" name="password" id="enterPassword" required />
+            </br />
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Close
+            </button>
+            <button type="submit" id="login" class="btn btn-primary">Login</button>
+            </div>
+        </div>
+        </div>
+ </form>
     <footer>
         <p>Created by Tom 😼, Edgar 😼 & Vlada 😼</p>
     </footer>
