@@ -7,6 +7,7 @@
 :root {
     --primary: #FFF7EC;
     --header-color: #035C42; 
+    --purple-color: rgb(155,81,224);
     --font-primary: 'Pacifico', cursive;
     --font-accent: 'Kanit', sans-serif;
     --font-text:'Hind', sans-serif;
@@ -39,16 +40,25 @@ nav a {
 
 }
 
+nav a:hover {
+    color: var(--purple-color);
+}
+
 body {
     margin: 0px 50px;
     text-align: center;
     background-color: var(--primary);
 }
 
+.container {
+    max-width: 980px;
+}
+
 main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 100px 0px;
 }
 
 .title{
@@ -75,9 +85,6 @@ p {
     line-height: 2;
 }
 
-.description{
-    margin-bottom: 100px;
-}
 
 /*                  BURGER MENU                  */
 .burger{
@@ -164,7 +171,7 @@ from{
 /*                  BURGER MENU END                  */
 
 
-
+/* FOOTER */
 
 footer {
     position: fixed;
@@ -175,10 +182,22 @@ footer {
     padding: 20px;
     font-family: var(--font-accent);
     background-color: var(--primary);
+   
 }
 
 footer p {
     font-size: 19px;
+    
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--header-color);
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: rgb(155,81,224);
 }
 
 @media only screen and (min-width:768px){
