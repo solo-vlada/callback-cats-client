@@ -30,6 +30,24 @@ nav {
 
 }
 
+#login, #register {
+    background-color:rgb(155,81,224);
+    border-color:rgb(155,81,224);
+}
+
+#login:hover, #register:hover {
+    opacity: 0.9;
+}
+
+#modalLabel {
+    font-family: var(--font-accent);
+    text-align: center;
+}
+
+.modal label {
+    font-family: var(--font-accent);
+}
+
 nav a {
     color: var(--header-color);
     text-decoration: none;
