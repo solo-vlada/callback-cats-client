@@ -19,10 +19,6 @@ for (let i = 0; i < msf_bullet_o.length; ++i) {
   msf_b_item.innerHTML = msf_bullet_nr;
 }
 
-// removes the first back button & the last next button
-//document.getElementsByName("back")[0].className = "msf_hide";
-// document.getElementsByName("next")[msf_bullet_o.length - 1].className = "msf_hide";
-
 // Makes the first dot active
 let msf_bullets = document.getElementsByClassName("msf_bullet");
 msf_bullets[msf_form_nr].className += " msf_bullet_active";
@@ -71,14 +67,21 @@ function msf_btn_back() {
   msf_getFsTag[msf_form_nr].className = "msf_show";
 }
 
-console.log("loaded");
-
 //  habit form /////////////////////////////////////////////
 const habitForm = document.querySelector("#habit-form");
 
 async function postHabit(e) {
   e.preventDefault();
-
+  let tempHabitArr = [...e.target.habit];
+  let tempFrequencyArr = [...e.target.frequency];
+  let habitType;
+  let frequency;
+  tempFrequencyArr.map((freq) => {
+    if (freq.checked) return (frequency = Number(freq.value));
+  });
+  tempHabitArr.map((habit) => {
+    if (habit.checked) return (habitType = Number(habit.value));
+  });
   try {
     const options = {
       method: "POST",
@@ -86,18 +89,21 @@ async function postHabit(e) {
         "Content-Type": "application/json",
         accesstoken: sessionStorage.getItem("accesstoken"),
       }),
-      body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
+      body: JSON.stringify({ frequency, habit: habitType }),
     };
     //UPDATE WITH SERVER LINK
     const r = await fetch(
-      //   `https://callback-cats-server.herokuapp.com/habits`,
-      "http://localhost:3000/habits",
+      `https://callback-cats-server.herokuapp.com/habits`,
+      // "http://localhost:3000/habits",
       options
     );
-    console.log("submitted to front end");
+    // console.log("submitted to front end");
     const data = await r.json();
 
-    if (data.err) {
+    if (!data.err) {
+      console.log(data);
+      return data;
+    } else {
       console.log(data.err);
       throw Error(data.err);
     }
@@ -106,9 +112,8 @@ async function postHabit(e) {
   }
 }
 
-habitForm.addEventListener("submit", (e) => {
+habitForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  postHabit(e);
-
+  const result = await postHabit(e);
 });
 //  habit form /////////////////////////////////////////////

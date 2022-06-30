@@ -1,3 +1,7 @@
+const loginForm = document.querySelector("#loginForm");
+const registerForm = document.querySelector("#registerForm");
+const lgtBtn = document.querySelector(".logout");
+
 async function requestLogin(e) {
   e.preventDefault();
   const username = e.target.username.value;
@@ -7,8 +11,10 @@ async function requestLogin(e) {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      mode: "cors",
       body: JSON.stringify({ username, password }),
     };
+    //UPDATE WITH SERVER LINK
     const r = await fetch(
       `https://callback-cats-server.herokuapp.com/users/login`,
       options
@@ -17,6 +23,7 @@ async function requestLogin(e) {
     if (data.err) {
       throw Error(data.err);
     }
+    console.log(data);
     if (data.success) {
       sessionStorage.setItem("accesstoken", data.accessToken);
       window.location.replace("/dashboard.html");
@@ -27,7 +34,10 @@ async function requestLogin(e) {
   }
 }
 
-const registerForm = document.querySelector("#registerForm");
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  requestLogin(e);
+});
 
 async function requestRegistration(e) {
   e.preventDefault();
@@ -42,6 +52,7 @@ async function requestRegistration(e) {
       mode: "cors",
       body: JSON.stringify({ username, email, password }),
     };
+    //UPDATE WITH SERVER LINK
     const r = await fetch(
       `https://callback-cats-server.herokuapp.com/users/register`,
       options
@@ -62,45 +73,9 @@ registerForm.addEventListener("submit", async (e) => {
   window.location.replace("/habit.html");
 });
 
-//REMOVE CODE BELOW
-// async function postFrequency(e) {
-// 	e.preventDefault();
-// 	try {
-// 		const options = {
-// 			method: 'POST',
-// 			headers: { 'Content-Type': 'application/json' },
-// 			body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
-// 		};
-// 		//UPDATE WITH SERVER LINK
-// 		const r = await fetch(`http://localhost:3000/users/habits`, options);
-// 		const data = await r.json();
-// 		if (data.err) {
-// 			throw Error(data.err);
-// 		}
-// 	} catch (err) {
-// 		console.warn(err);
-// 	}
-// }
-
-//REMOVE THIS CODE
-// async function login(data) {
-// 	console.log(data);
-// 	// const payload = jwt_decode(data.token);
-// 	// console.log(payload);
-// 	await localStorage.setItem('token', data.accessToken);
-// 	location.hash = '#dashboard';
-// 	if (data.success) {
-// 		window.location.replace('/dashboard.html');
-// 	}
-// }
-
-function logout() {
+lgtBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.location.replace("/index.html");
   localStorage.clear();
-  location.hash = "#login";
-}
-
-// //REMOVE THIS CODE
-// function currentUser() {
-//   const usernme = localStorage.getItem("username");
-//   return usernme;
-// }
+  sessionStorage.clear("accesstoken");
+});
