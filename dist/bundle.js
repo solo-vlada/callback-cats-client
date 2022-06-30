@@ -1,1 +1,1 @@
-
+console.error("Error: Can't walk dependency graph: Cannot find module './getUserData' from '/Users/vladyslavasolomiana/Desktop/Futureproof/LAP2/Project/static/js/main.js'\n    required by /Users/vladyslavasolomiana/Desktop/Futureproof/LAP2/Project/static/js/main.js");
