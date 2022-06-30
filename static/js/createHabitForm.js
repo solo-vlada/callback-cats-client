@@ -74,7 +74,16 @@ const habitForm = document.querySelector("#habit-form");
 
 async function postHabit(e) {
   e.preventDefault();
-
+  let tempHabitArr = [...e.target.habit];
+  let tempFrequencyArr = [...e.target.frequency];
+  let habitType;
+  let frequency;
+  tempFrequencyArr.map((freq) => {
+    if (freq.checked) return (frequency = Number(freq.value));
+  });
+  tempHabitArr.map((habit) => {
+    if (habit.checked) return (habitType = Number(habit.value));
+  });
   try {
     const options = {
       method: "POST",
@@ -82,7 +91,7 @@ async function postHabit(e) {
         "Content-Type": "application/json",
         accesstoken: sessionStorage.getItem("accesstoken"),
       }),
-      body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
+      body: JSON.stringify({ frequency, habit: habitType }),
     };
     //UPDATE WITH SERVER LINK
     const r = await fetch(
@@ -94,6 +103,7 @@ async function postHabit(e) {
     const data = await r.json();
 
     if (!data.err) {
+      console.log(data);
       return data;
     } else {
       console.log(data.err);
