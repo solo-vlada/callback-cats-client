@@ -19,9 +19,6 @@ for (let i = 0; i < msf_bullet_o.length; ++i) {
   msf_b_item.innerHTML = msf_bullet_nr;
 }
 
-// removes the first back button & the last next button
-//document.getElementsByName("back")[0].className = "msf_hide";
-// document.getElementsByName("next")[msf_bullet_o.length - 1].className = "msf_hide";
 
 // Makes the first dot active
 let msf_bullets = document.getElementsByClassName("msf_bullet");
@@ -71,7 +68,6 @@ function msf_btn_back() {
   msf_getFsTag[msf_form_nr].className = "msf_show";
 }
 
-console.log("loaded");
 
 //  habit form /////////////////////////////////////////////
 const habitForm = document.querySelector("#habit-form");
