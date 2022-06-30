@@ -1,3 +1,7 @@
+
+const loginForm = document.querySelector('#loginForm');
+const registerForm = document.querySelector('#registerForm');
+
 async function requestLogin(e) {
   e.preventDefault();
   const username = e.target.username.value;
@@ -29,7 +33,11 @@ async function requestLogin(e) {
   }
 }
 
-const registerForm = document.querySelector("#registerForm");
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  requestLogin(e);
+});
+
 
 async function requestRegistration(e) {
   e.preventDefault();
@@ -53,15 +61,15 @@ async function requestRegistration(e) {
     if (data.err) {
       throw Error(data.err);
     }
-    await requestLogin(e);
+    requestLogin(e);
   } catch (err) {
     console.warn(err);
   }
 }
 
-registerForm.addEventListener("submit", async (e) => {
+registerForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  await requestRegistration(e);
+  requestRegistration(e);
   window.location.replace("/habit.html");
 });
 
