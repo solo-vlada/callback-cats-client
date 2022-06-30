@@ -19,7 +19,6 @@ for (let i = 0; i < msf_bullet_o.length; ++i) {
   msf_b_item.innerHTML = msf_bullet_nr;
 }
 
-
 // Makes the first dot active
 let msf_bullets = document.getElementsByClassName("msf_bullet");
 msf_bullets[msf_form_nr].className += " msf_bullet_active";
@@ -68,7 +67,6 @@ function msf_btn_back() {
   msf_getFsTag[msf_form_nr].className = "msf_show";
 }
 
-
 //  habit form /////////////////////////////////////////////
 const habitForm = document.querySelector("#habit-form");
 
@@ -95,8 +93,8 @@ async function postHabit(e) {
     };
     //UPDATE WITH SERVER LINK
     const r = await fetch(
-      // `https://callback-cats-server.herokuapp.com/habits`,
-      "http://localhost:3000/habits",
+      `https://callback-cats-server.herokuapp.com/habits`,
+      // "http://localhost:3000/habits",
       options
     );
     // console.log("submitted to front end");
