@@ -1,1 +1,1 @@
-console.error("Error: Can't walk dependency graph: Cannot find module '/Users/vladyslavasolomiana/Desktop/Futureproof/LAP2/Project/static/js/nav.js' from '/Users/vladyslavasolomiana/Desktop/Futureproof/LAP2/Project/static/js/_fake.js'\n    required by /Users/vladyslavasolomiana/Desktop/Futureproof/LAP2/Project/static/js/_fake.js");
+
