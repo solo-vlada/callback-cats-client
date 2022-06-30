@@ -98,8 +98,8 @@ registerForm.addEventListener("submit", async (e) => {
 // }
 
 function logout() {
-  localStorage.clear();
-  location.hash = "#login";
+  sessionStorage.clear();
+  window.location.replace("/");
 }
 
 //REMOVE THIS CODE
