@@ -1,6 +1,8 @@
-const loginForm = document.querySelector("#loginForm");
-const registerForm = document.querySelector("#registerForm");
+
+const loginForm = document.querySelector('#loginForm');
+const registerForm = document.querySelector('#registerForm');
 const lgtBtn = document.querySelector(".logout");
+
 
 async function requestLogin(e) {
   e.preventDefault();
@@ -73,9 +75,13 @@ registerForm.addEventListener("submit", async (e) => {
   window.location.replace("/habit.html");
 });
 
-lgtBtn.addEventListener("click", (e) => {
+
+
+lgtBtn.addEventListener('click', (e) => {
   e.preventDefault();
   window.location.replace("/index.html");
   localStorage.clear();
   sessionStorage.clear("accesstoken");
+  
 });
+
