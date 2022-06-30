@@ -51,7 +51,7 @@ async function requestRegistration(e) {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-
+      mode: "cors",
       body: JSON.stringify({ username, email, password }),
     };
     //UPDATE WITH SERVER LINK
@@ -79,6 +79,7 @@ registerForm.addEventListener("submit", async (e) => {
   requestRegistration(e);
   //const result = await requestLogin(e);
   // window.location.replace("/habit.html");
+
 });
 
 
