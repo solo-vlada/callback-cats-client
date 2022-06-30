@@ -1,6 +1,5 @@
-
-const loginForm = document.querySelector('#loginForm');
-const registerForm = document.querySelector('#registerForm');
+const loginForm = document.querySelector("#loginForm");
+const registerForm = document.querySelector("#registerForm");
 
 async function requestLogin(e) {
   e.preventDefault();
@@ -23,6 +22,7 @@ async function requestLogin(e) {
     if (data.err) {
       throw Error(data.err);
     }
+    console.log(data);
     if (data.success) {
       sessionStorage.setItem("accesstoken", data.accessToken);
       window.location.replace("/dashboard.html");
@@ -37,7 +37,6 @@ loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
   requestLogin(e);
 });
-
 
 async function requestRegistration(e) {
   e.preventDefault();
@@ -105,8 +104,10 @@ registerForm.addEventListener("submit", (e) => {
 // 	}
 // }
 
-function logout() {
-  sessionStorage.clear();
+async function logout() {
+  const accessToken = sessionStorage.getItem("accesstoken");
+  if (!accessToken) return;
+  sessionStorage.clear("accesstoken");
   window.location.replace("/");
 }
 

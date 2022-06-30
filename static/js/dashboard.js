@@ -93,3 +93,15 @@ const renderChart1 = async () => {
 };
 
 // GRAPHS API ////////////////////////////////////////////////////
+
+async function logout() {
+  const accessToken = sessionStorage.getItem("accesstoken");
+  if (!accessToken) return;
+  sessionStorage.clear("accesstoken");
+  window.location.replace("/");
+}
+
+const logoutBtn = document.querySelector(".logout-button");
+logoutBtn.addEventListener("click", () => {
+  logout();
+});
