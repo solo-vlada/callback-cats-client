@@ -1,8 +1,5 @@
-
-const loginForm = document.querySelector('#loginForm');
-const registerForm = document.querySelector('#registerForm');
-
-
+const loginForm = document.querySelector("#loginForm");
+const registerForm = document.querySelector("#registerForm");
 
 async function requestLogin(e) {
   e.preventDefault();
@@ -35,7 +32,7 @@ async function requestLogin(e) {
   }
 }
 
-loginForm.addEventListener("submit", async (e) =>  {
+loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   let result = await requestLogin(e);
   window.location.replace("/dashboard.html");
@@ -79,9 +76,4 @@ registerForm.addEventListener("submit", async (e) => {
   requestRegistration(e);
   //const result = await requestLogin(e);
   // window.location.replace("/habit.html");
-
-
-
-
-
-
+});
