@@ -99,7 +99,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     //////////////////  //
     let delayed;
     let dataArr = [];
-    console.log(user.habits[0].days.inputCounter);
     user.habits.map((el) =>
       dataArr.push(el.days[el.days.length - 1].inputCounter)
     );
