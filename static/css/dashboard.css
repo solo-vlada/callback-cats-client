@@ -43,6 +43,7 @@ animation-timing-function: linear;
 .dashboard-container{
     min-width: 100vw;
     overflow-x: hidden;
+    margin-bottom: 2rem;
 }
 
 
@@ -59,7 +60,7 @@ animation-timing-function: linear;
     font-size: 16pt;
     border: none;
     border-radius: 3px;
-    background: black;
+    background: #035C42;
     color: white;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.429);
     cursor: pointer;
@@ -115,22 +116,23 @@ color: black;
 }
 
 .stats-container{
-    min-height: 500px;
+    height:max-content;
     margin-top: 6rem;
     width: 94%;
     margin-left: auto;
     margin-right: auto;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-around;
 box-shadow: 0px 0px 2px rgb(90, 90, 90);
 }
 .stats-board{
+
     min-height: 600px;
     height: auto;
     width: 80%;
-    margin: 2rem auto;
+    margin: 400px auto 2rem auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -249,10 +251,11 @@ background-color: rgba(255, 0, 0, 0.527);
 }
 .controls-btns{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-around;
     width: 100%;
+    height: 100%;
 }
 /* FOOTER */
 

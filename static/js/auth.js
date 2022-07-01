@@ -74,6 +74,5 @@ async function requestRegistration(e) {
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   requestRegistration(e);
-  //const result = await requestLogin(e);
   // window.location.replace("/habit.html");
 });

@@ -1,86 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" href="./static/img/favicon.png">
-		<script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
-		integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<script
-		defer
-		src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"
-		></script>
-		<script defer src="https://kit.fontawesome.com/7e4367fc7b.js" crossorigin="anonymous"></script>
-		<script defer src="./static/js/dashboard.js"></script>
-		<link rel="stylesheet" href="./static/css/dashboard.css" />
-		<title>Dashboard</title>
-	</head>
-	<body>
-		<div class="dashboard-container">
-			<h1 class="welcome-message">Loading...</h1>
-			<!-- this button will switch between current trackers and completed trackers -->
-			<div class="btn-container">
-				<button class="swap-button btn">Completed</button>
-			</div>
-			<!-- this is the circular icons for each habbit -->
-			<div id="habits" class="habbit-icon-container">
-				
-			</div>
-<div class="btn-container">
-				<button class="add btn">+</button>
-</div>
-			<div id="old-habits" class="completed-trackers habbit-icon-container">
-				
-			</div>
-			<div class="stats-container">
-				<button class="stats-button btn">Stats</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./static/img/favicon.png" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+      integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/jwt-decode@1.5.1/build/jwt-decode.min.js"
+    ></script>
+    <script
+      defer
+      src="https://kit.fontawesome.com/7e4367fc7b.js"
+      crossorigin="anonymous"
+    ></script>
+    <script defer src="./static/js/dashboard.js"></script>
+    <link rel="stylesheet" href="./static/css/dashboard.css" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <h1 class="welcome-message">Loading...</h1>
+      <!-- this button will switch between current trackers and completed trackers -->
+      <div class="btn-container">
+        <button class="swap-button btn">Completed</button>
+      </div>
+      <!-- this is the circular icons for each habbit -->
+      <div id="habits" class="habbit-icon-container"></div>
+      <div class="btn-container">
+        <button class="add btn">+</button>
+      </div>
+      <div
+        id="old-habits"
+        class="completed-trackers habbit-icon-container"
+      ></div>
+      <div class="stats-container">
+        <button class="stats-button btn">Stats</button>
 
-<!-- default view: shows overview of user and habits -->
-<div id="user-overview">
-<!-- default : SHOWS OVERALL USER STATS AND TRACKER STATS -->
-<div class="completed-stats">
-			<p id="overall-habits">Overall: 0</p>
-			<p id="active-count">Active: 0</p>
-			<p id="completed-count">Completed: 0</p>
-</div>
- <div id="completed-chart-container">
-	<canvas id="completed-chart"></canvas>
- </div>
-	
-</div>
-				<!-- default: hidden => populated when single habit is clicked on -->
-				<div id="single-habit-view">
-					<div class="stats-board">
-						<h1 class="habit-title">loading...</h1>
-						<ul class="stats">
-						<li class="streak-statistics">
-							<p>Best Streak:</p>
-							<div class="streaks-count"><p class="streaks-count-p">4</p></div>
-						</li>
-						<li class="completion-statistics">
-							<p>Completion:</p>
-							<div class="completion-progress-bar"></div>
-						</li>
-					</ul>
-					<div class="controls-btns">
-						<div class="delete-btn btn">Remove Tracker</div>
-						<button class="increment-btn btn">Did It +1!</button>
-					</div>
-				</div>
-			</div>
-		</div>
-			<div class="logout-button-container">
-				<div class="btn-container">
-					<button class="logout-button btn">log out</button>
-				</div>
-			</div>
-		</div>
-	<footer>
-		<p>Created by <a href="https://github.com/TommyHacker" target="_blank">Tom</a> 😼, <a
-				href="https://github.com/CrookedTimber" target="_blank">Edgar</a> 😼 & <a
-				href="https://github.com/solo-vlada" target="_blank">Vlada</a> 😼</p>
-	</footer>
-	</body>
+        <!-- default view: shows overview of user and habits -->
+        <div id="user-overview">
+          <!-- default : SHOWS OVERALL USER STATS AND TRACKER STATS -->
+          <div class="completed-stats">
+            <p id="overall-habits">Overall: 0</p>
+            <p id="active-count">Active: 0</p>
+            <p id="completed-count">Completed: 0</p>
+          </div>
+          <div id="completed-chart-container">
+            <canvas id="completed-chart"></canvas>
+          </div>
+        </div>
+        <!-- default: hidden => populated when single habit is clicked on -->
+        <div id="single-habit-view">
+          <div class="stats-board">
+            <h1 class="habit-title">loading...</h1>
+            <ul class="stats">
+              <li class="streak-statistics">
+                <p>Best Streak:</p>
+                <div class="streaks-count">
+                  <p class="streaks-count-p">4</p>
+                </div>
+              </li>
+              <li class="completion-statistics">
+                <p>Completion:</p>
+                <div class="completion-progress-bar"></div>
+              </li>
+            </ul>
+            <div class="controls-btns">
+              <button class="increment-btn btn">Did It +1!</button>
+              <div class="delete-btn btn">Remove Tracker</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="logout-button-container">
+        <div class="btn-container">
+          <button class="logout-button btn">log out</button>
+        </div>
+      </div>
+      <footer>
+        <p>
+          Created by
+          <a href="https://github.com/TommyHacker" target="_blank">Tom</a> 😼,
+          <a href="https://github.com/CrookedTimber" target="_blank">Edgar</a>
+          😼 &
+          <a href="https://github.com/solo-vlada" target="_blank">Vlada</a> 😼
+        </p>
+      </footer>
+    </div>
+  </body>
 </html>
