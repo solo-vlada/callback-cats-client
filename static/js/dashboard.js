@@ -258,7 +258,8 @@ const populateOverallStats = async (habits) => {
 };
 
 const statsButton = document.querySelector(".stats-button");
-statsButton.addEventListener("click", () => {
+statsButton.addEventListener("click", (e) => {
+  e.stopPropagation();
   singleHabitView.style.animationName = "slide-out";
   userOverview.style.animationName = "slide-in";
 });
@@ -290,8 +291,8 @@ deleteBtn.addEventListener("click", async () => {
 const incrementHabit = async () => {
   const habitType = selectedHabit.habitType;
   await fetch(
-    // `https://callback-cats-server.herokuapp.com/habits/${selectedHabit._id}`,
-    `http://localhost:3000/habits/${selectedHabit._id}`,
+    `https://callback-cats-server.herokuapp.com/habits/${selectedHabit._id}`,
+    // `http://localhost:3000/habits/${selectedHabit._id}`,
     {
       method: "PUT",
       mode: "cors",
@@ -309,5 +310,5 @@ const incrementHabit = async () => {
 const incrementBtn = document.querySelector(".increment-btn");
 incrementBtn.addEventListener("click", () => {
   incrementHabit();
-  // console.log(selectedHabit.habitType);
+  console.log(selectedHabit.habitType);
 });
