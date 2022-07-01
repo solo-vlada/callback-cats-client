@@ -87,7 +87,9 @@ window.addEventListener("DOMContentLoaded", async () => {
   const generateGraph = (containerElement) => {
     // GRAPHS API ////////////////////////////////////////////////////
     const ctx = containerElement.getContext("2d");
-    const labels = ["active", "completed", 3, 4, 5, 6, 7];
+    let labelsArr = [];
+    user.habits.map((el) => labelsArr.push(habitFormatter(el.habitType).title));
+    const labels = labelsArr;
 
     // gradient fill
 
@@ -96,11 +98,15 @@ window.addEventListener("DOMContentLoaded", async () => {
     gradient.addColorStop(1, "rgba(104, 188, 74, 1)");
     //////////////////  //
     let delayed;
+    let dataArr = [];
+    user.habits.map((el) =>
+      dataArr.push(el.days[el.days.length - 1].inputCounter)
+    );
     const data = {
       labels,
       datasets: [
         {
-          data: [`${active}`, `${completed}`, "3", "40", "15", "62", "7"],
+          data: dataArr,
           label: "Trackers",
           // tension: 0.6,
           animation: {
@@ -124,7 +130,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     };
 
     const config = {
-      type: "line",
+      type: "bar",
       data,
       options: {
         hitRadius: 30,
