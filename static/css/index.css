@@ -4,6 +4,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Hind:wght@300&display=swap');
 
+
+@import "./footer.css";
 :root {
     --primary: #FFF7EC;
     --header-color: #035C42; 
@@ -192,34 +194,7 @@ from{
 /*                  BURGER MENU END                  */
 
 
-/* FOOTER */
 
-footer {
-    position: fixed;
-    left: 0;
-    bottom:0;
-    width: 100%;
-    text-align: center;
-    padding: 20px;
-    background-color: var(--primary);
-    font-family: var(--font-accent);
-   
-}
-
-footer p {
-    font-size: 19px;
-    font-family: var(--font-accent);
-}
-
-footer a {
-    text-decoration: none;
-    color: var(--header-color);
-    font-weight: bold;
-}
-
-footer a:hover {
-    color: rgb(155,81,224);
-}
 
 @media only screen and (min-width:768px){
     .burger{

@@ -34,3 +34,14 @@ window.addEventListener("resize", () => {
     hideDropdown();
   }
 });
+
+// Check if user is logged in, if they are, go to the dashboard!
+
+const areYouThere = async () => {
+  const accessToken = sessionStorage.getItem("accesstoken");
+  if (!accessToken) return;
+  window.location.replace("/dashboard.html");
+};
+window.addEventListener("DOMContentLoaded", () => {
+  areYouThere();
+});
