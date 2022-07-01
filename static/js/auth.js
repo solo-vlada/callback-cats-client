@@ -77,11 +77,10 @@ registerForm.addEventListener("submit", async (e) => {
 
 
 
-lgtBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  window.location.replace("/index.html");
-  localStorage.clear();
-  sessionStorage.clear("accesstoken");
-  
-});
+// lgtBtn.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   window.location.replace("/index.html");
+//   localStorage.clear();
+//   sessionStorage.clear("accesstoken");
+// });
 

@@ -5,6 +5,11 @@ const welcomeMessage = document.querySelector(".welcome-message");
 const habits = document.querySelector("#habits");
 const oldHabits = document.querySelector("#old-habits");
 const completedChart = document.querySelector("#completed-chart");
+const singleHabitView = document.querySelector("#single-habit-view");
+const userOverview = document.querySelector("#user-overview");
+const newHabitBtn = document.querySelector(".add");
+const habitTitle = document.querySelector(".habit-title");
+let selectedHabit;
 
 const habitFormatter = (num) => {
   switch (num) {
@@ -29,7 +34,7 @@ const habitFormatter = (num) => {
     case 4:
       return (habitType = {
         title: "Healthy meal",
-        class: "fa-solid fa-blueberries",
+        class: "fa-solid fa-carrot",
       });
       break;
     case 5:
@@ -145,15 +150,51 @@ window.addEventListener("DOMContentLoaded", async () => {
   if (!user) {
     return window.location.replace("/");
   }
+  // USER HAS BEEN POPULATED HERE!/////////////////////////////////////////
+
+  populateOverallStats(user.habits);
+
   welcomeMessage.textContent = `Welcome, ${user.username}`;
+  if (user.habits.length === 0) {
+    const firstHabitMessage = document.createElement("h1");
+    firstHabitMessage.textContent = "Track your first habit!";
+    switchBtn.style.display = "none";
+    newHabitBtn.style.transform = "translateY(-250px)";
+    userOverview.style.display = "none";
+    const statsContainer = document.querySelector(".stats-container");
+    statsContainer.style.display = "none";
+
+    return habits.append(firstHabitMessage);
+    //  HIDE THE ADD TRACKER BUTTON, THEY ARE MAXED OUT.
+  } else if (user.habits.length >= 6) {
+    newHabitBtn.style.display = "none";
+  }
   let completed = user.habits.filter((habit) => habit.completed).length;
   let active = user.habits.filter((habit) => !habit.completed).length;
-  user.habits.map((element, index) => {
+  user.habits.map(async (element, index) => {
     const habitIcon = document.createElement("div");
+    const block = document.createElement("div");
+    block.style.backgroundColor = "green";
+
+    // progress bar
+    const progressBar = document.querySelector(".completion-progress-bar");
+    const tick = await element.days.length;
+
+    for (let i = 0; i < tick; i++) {
+      progressBar.append(block);
+    }
 
     const habitIllustration = document.createElement("i");
+
+    // habit click/////////////////////////////////////////////////
     habitIllustration.addEventListener("click", () => {
+      userOverview.style.animationName = "slide-out";
+      singleHabitView.style.display = "flex";
+      singleHabitView.style.animationName = "slide-in";
       generateHabitStats(element);
+      selectedHabit = element;
+      habitTitle.textContent = habitFormatter(element.habitType).title;
+      window.scroll({ behavior: "smooth", top: 900 });
     });
     habitIllustration.className = `${
       habitFormatter(element.habitType).class
@@ -172,12 +213,12 @@ switchBtn.addEventListener("click", (e) => {
   if (!trackerState) {
     iconContainer.style.animationName = "slide-in";
     completedTrackers.style.animationName = "slide-out";
-    switchBtn.textContent = "View Completed";
+    switchBtn.textContent = "Completed";
     switchBtn.style.animationName = "spin";
   } else {
     iconContainer.style.animationName = "slide-out";
     completedTrackers.style.animationName = "slide-in";
-    switchBtn.textContent = "View in-progress";
+    switchBtn.textContent = "Active";
     switchBtn.style.animationName = "unspin";
   }
 });
@@ -199,9 +240,74 @@ let currentHabit;
 const generateHabitStats = (habit) => {
   const bestStreakP = document.querySelector(".streaks-count-p");
   bestStreakP.textContent = habit.bestStreak.toString();
-  console.log("habit title", habitFormatter(habit.habitType).title);
-  console.log("current streak", habit.currentStreak);
-  console.log("how many times per day", habit.frequencyPerDay);
-  bestStreak.append;
-  console.log(habit._id);
+  // console.log("habit title", habitFormatter(habit.habitType).title);
+  // console.log("current streak", habit.currentStreak);
+  // console.log("how many times per day", habit.frequencyPerDay);
+  // console.log(habit._id);
 };
+
+const populateOverallStats = async (habits) => {
+  const overall = document.querySelector("#overall-habits");
+  const activeCount = document.querySelector("#active-count");
+  const completeCount = document.querySelector("#completed-count");
+  overall.textContent = "Overall: " + habits.length;
+  activeCount.textContent =
+    "Active: " + habits.filter((habit) => !habit.completed).length;
+  completeCount.textContent =
+    "Completed: " + habits.filter((habit) => habit.completed).length;
+};
+
+const statsButton = document.querySelector(".stats-button");
+statsButton.addEventListener("click", () => {
+  singleHabitView.style.animationName = "slide-out";
+  userOverview.style.animationName = "slide-in";
+});
+
+newHabitBtn.addEventListener("click", () => {
+  window.location.replace("/habit.html");
+});
+
+const deleteBtn = document.querySelector(".delete-btn");
+deleteBtn.addEventListener("click", async () => {
+  await fetch(
+    `https://callback-cats-server.herokuapp.com/habits/${selectedHabit._id}`,
+    {
+      method: "DELETE",
+      mode: "cors",
+      headers: new Headers({
+        accesstoken: sessionStorage.getItem("accesstoken"),
+      }),
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      if (!data.success) return;
+      window.location.replace("/dashboard.html");
+    })
+    .catch((err) => console.log(err));
+});
+
+const incrementHabit = async () => {
+  const habitType = selectedHabit.habitType;
+  await fetch(
+    // `https://callback-cats-server.herokuapp.com/habits/${selectedHabit._id}`,
+    `http://localhost:3000/habits/${selectedHabit._id}`,
+    {
+      method: "PUT",
+      mode: "cors",
+      headers: new Headers({
+        accesstoken: sessionStorage.getItem("accesstoken"),
+        "Content-Type": "application/json",
+      }),
+      body: JSON.stringify({ habitType }),
+    }
+  )
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
+
+const incrementBtn = document.querySelector(".increment-btn");
+incrementBtn.addEventListener("click", () => {
+  incrementHabit();
+  // console.log(selectedHabit.habitType);
+});

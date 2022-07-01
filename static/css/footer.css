@@ -1,0 +1,28 @@
+/* FOOTER */
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: var(--primary);
+    font-family: var(--font-accent);
+
+}
+
+footer p {
+    font-size: 19px;
+    font-family: var(--font-accent);
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--header-color);
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: rgb(155, 81, 224);
+}

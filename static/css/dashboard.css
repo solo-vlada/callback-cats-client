@@ -4,6 +4,16 @@
     box-sizing: border-box;
     font-family: sans-serif;
 }
+
+:root {
+    --primary: #FFF7EC;
+    --header-color: #035C42;
+    --purple-color: rgb(155, 81, 224);
+    --font-primary: 'Pacifico', cursive;
+    --font-accent: 'Kanit', sans-serif;
+    --font-text: 'Hind', sans-serif;
+    --light: #FFF7F7;
+}
 /* 
  ::-webkit-scrollbar{ 
 display: none;
@@ -46,7 +56,7 @@ animation-timing-function: linear;
 .btn{
     width: 120px;
     padding: 8px;
-    font-size: 10pt;
+    font-size: 16pt;
     border: none;
     border-radius: 3px;
     background: black;
@@ -97,13 +107,15 @@ color: black;
     user-select: none;
     background-image:radial-gradient(white 50%,rgb(225, 224, 224));
     color: black;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.437);
-    z-index: 51;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.437);    z-index: 51;
     overflow: hidden;
+}
+.habit-icon:hover{
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.897);
 }
 
 .stats-container{
-    height: min-content;
+    min-height: 500px;
     margin-top: 6rem;
     width: 94%;
     margin-left: auto;
@@ -119,6 +131,10 @@ box-shadow: 0px 0px 2px rgb(90, 90, 90);
     height: auto;
     width: 80%;
     margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 .text-align-left{
     width: 100%;
@@ -142,7 +158,9 @@ padding: 10px;
     border: black solid 1px;
     border-radius: 4px;
     height: 20px;
-    width: 65%;
+    width: 40%;
+    display: grid;
+    grid-template-columns: 14% 14% 14% 14% 14% 14% 14%;
     }
 .completed-trackers{
     position: absolute;
@@ -164,9 +182,14 @@ padding: 10px;
 }
 
 #single-habit-view{
-    display: flex;
+    display: none;
     min-height: 600px ;
     width: 100%;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    transform: translateY(-400px);
+    font-size: 18pt;
 }
 #user-overview{
     background: #FFF7EC;
@@ -180,6 +203,9 @@ padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
 }
 #overall-habits , #active-count, #completed-count{
     text-align: center;
@@ -194,6 +220,7 @@ i {
 }
 
 #completed-chart-container {
+margin-top: 200px;
     width: 100%;
 }
 
@@ -205,7 +232,67 @@ i {
     width: 100%;
 }
 
+.add{
+    font-size: 20pt;
+    padding: 5px 0;
+}
+
+.delete-btn{
+opacity: 0.5;
+padding: 10px;
+width: 100%;
+text-align: center;
+background-color: rgba(255, 0, 0, 0.527);
+}
+.stats{
+    width: 100%;
+}
+.controls-btns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+/* FOOTER */
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: var(--primary);
+    font-family: var(--font-accent);
+
+}
+
+footer p {
+    font-size: 19px;
+    font-family: var(--font-accent);
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--header-color);
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: rgb(155, 81, 224);
+}
+.habit-title{
+    text-transform: capitalize;
+}
+
 @media only screen and (min-width:768px){
+    #single-habit-view {
+            transform: translateY(-800px)
+        }
+    .stats {
+            width: 40%;
+        }
     .completed-stats {
         margin: 4rem 0;
     }
@@ -225,7 +312,6 @@ i {
     .btn{
         padding: 20px;
         width: 200px;
-        font-size: 16pt;
     }
     .habit-icon{
         height: 250px;
@@ -242,6 +328,8 @@ i {
     .completion-progress-bar{
         background: white;
         border: solid black 1px;
+        display: grid;
+        grid-template-columns: 14% 14% 14% 14% 14% 14%;
     }
         .completed-trackers {
             position: absolute;
@@ -253,9 +341,9 @@ i {
         i{
             font-size: 70pt;
         }
-                #completed-chart-container {
-                    width: 40%;
-                }
+        #completed-chart-container {
+        width: 40%;
+        }
 }
 
 
@@ -279,15 +367,3 @@ to{
         opacity: 0;
         margin-left: -175vw;}
 }
-@keyframes spin {
-    50% {
-           background-color: white;
-           color: white;
-        }
-}
-
-@keyframes unspin {
-    50% {
-        background-color: white;
-            color: white;
-        }}

@@ -102,6 +102,7 @@ async function postHabit(e) {
 
     if (!data.err) {
       console.log(data);
+      window.location.replace("/dashboard.html");
       return data;
     } else {
       console.log(data.err);

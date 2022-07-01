@@ -15,21 +15,22 @@
 		<script defer src="https://kit.fontawesome.com/7e4367fc7b.js" crossorigin="anonymous"></script>
 		<script defer src="./static/js/dashboard.js"></script>
 		<link rel="stylesheet" href="./static/css/dashboard.css" />
-
 		<title>Dashboard</title>
 	</head>
 	<body>
-		<!-- <button id="add-tracker" class="btn">+ Tracker</button> -->
 		<div class="dashboard-container">
 			<h1 class="welcome-message">Loading...</h1>
 			<!-- this button will switch between current trackers and completed trackers -->
 			<div class="btn-container">
-				<button class="swap-button btn">View Completed</button>
+				<button class="swap-button btn">Completed</button>
 			</div>
 			<!-- this is the circular icons for each habbit -->
 			<div id="habits" class="habbit-icon-container">
 				
 			</div>
+<div class="btn-container">
+				<button class="add btn">+</button>
+</div>
 			<div id="old-habits" class="completed-trackers habbit-icon-container">
 				
 			</div>
@@ -38,7 +39,7 @@
 
 <!-- default view: shows overview of user and habits -->
 <div id="user-overview">
-
+<!-- default : SHOWS OVERALL USER STATS AND TRACKER STATS -->
 <div class="completed-stats">
 			<p id="overall-habits">Overall: 0</p>
 			<p id="active-count">Active: 0</p>
@@ -52,34 +53,34 @@
 				<!-- default: hidden => populated when single habit is clicked on -->
 				<div id="single-habit-view">
 					<div class="stats-board">
+						<h1 class="habit-title">loading...</h1>
 						<ul class="stats">
 						<li class="streak-statistics">
-							<p>Streaks:</p>
+							<p>Best Streak:</p>
 							<div class="streaks-count"><p class="streaks-count-p">4</p></div>
 						</li>
 						<li class="completion-statistics">
-							<p>Completeion:</p>
+							<p>Completion:</p>
 							<div class="completion-progress-bar"></div>
 						</li>
 					</ul>
-					<div class="chart-statistics">
-						<div class="chart-statistics-left">
-							<canvas id="canvas-left"></canvas>
-						</div>
-						<div class="chart-statistics-right">
-							<canvas id="canvas-right"></canvas>
-						</div>
+					<div class="controls-btns">
+						<div class="delete-btn btn">Remove Tracker</div>
+						<button class="increment-btn btn">Did It +1!</button>
 					</div>
-					<div class="calendar-statistics"></div>
 				</div>
 			</div>
 		</div>
 			<div class="logout-button-container">
-				<button class="logout-button">log out</button>
+				<div class="btn-container">
+					<button class="logout-button btn">log out</button>
+				</div>
 			</div>
 		</div>
-			<footer>
-				<p>Created by Tom 😼, Edgar 😼 & Vlada 😼</p>
-			</footer>
+	<footer>
+		<p>Created by <a href="https://github.com/TommyHacker" target="_blank">Tom</a> 😼, <a
+				href="https://github.com/CrookedTimber" target="_blank">Edgar</a> 😼 & <a
+				href="https://github.com/solo-vlada" target="_blank">Vlada</a> 😼</p>
+	</footer>
 	</body>
 </html>
