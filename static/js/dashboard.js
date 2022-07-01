@@ -169,6 +169,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   } else if (user.habits.length >= 6) {
     newHabitBtn.style.display = "none";
   }
+
   let completed = user.habits.filter((habit) => habit.completed).length;
   let active = user.habits.filter((habit) => !habit.completed).length;
   user.habits.map(async (element, index) => {
@@ -244,6 +245,20 @@ const generateHabitStats = (habit) => {
   // console.log("current streak", habit.currentStreak);
   // console.log("how many times per day", habit.frequencyPerDay);
   // console.log(habit._id);
+  let todayCounter;
+  todayCounter = habit.days[habit.days.length - 1].inputCounter;
+  let message;
+  if (todayCounter == 0)
+    message = `You have not completed this task for today.`;
+  else if (todayCounter == 1) {
+    message = `Task completed once today!`;
+  } else {
+    message = `You have completed this task ${todayCounter} times today!`;
+  }
+  const targetForDay = document.querySelector(".target-for-day");
+  const completedToday = document.querySelector(".completed-today");
+  completedToday.textContent = message;
+  targetForDay.textContent = `Target for the day: ${habit.frequencyPerDay}`;
 };
 
 const populateOverallStats = async (habits) => {
@@ -308,7 +323,7 @@ const incrementHabit = async () => {
 };
 
 const incrementBtn = document.querySelector(".increment-btn");
-incrementBtn.addEventListener("click", () => {
-  incrementHabit();
-  console.log(selectedHabit.habitType);
+incrementBtn.addEventListener("click", async () => {
+  await incrementHabit();
+  window.location.replace("/dashboard.html");
 });

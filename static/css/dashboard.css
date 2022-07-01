@@ -80,6 +80,9 @@ background-color:white;
 color: black;
 }
 
+.target-for-day, .completed-today{
+    padding: 10px;
+}
 .habbit-icon-container{
     display: flex;
     align-items: center;
