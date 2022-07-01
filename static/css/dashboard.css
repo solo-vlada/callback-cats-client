@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: 'Hind',
+        sans-serif;
 }
 
 :root {
@@ -37,6 +41,7 @@ animation-timing-function: linear;
     top: 0;
     left: 0;
     opacity: 0.4;
+    font-family: "Pacifico";
     /* display: none; */
 }
 
