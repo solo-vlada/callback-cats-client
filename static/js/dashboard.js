@@ -258,7 +258,8 @@ const populateOverallStats = async (habits) => {
 };
 
 const statsButton = document.querySelector(".stats-button");
-statsButton.addEventListener("click", () => {
+statsButton.addEventListener("click", (e) => {
+  e.stopPropagation();
   singleHabitView.style.animationName = "slide-out";
   userOverview.style.animationName = "slide-in";
 });
