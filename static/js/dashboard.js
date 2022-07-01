@@ -291,8 +291,8 @@ deleteBtn.addEventListener("click", async () => {
 const incrementHabit = async () => {
   const habitType = selectedHabit.habitType;
   await fetch(
-    // `https://callback-cats-server.herokuapp.com/habits/${selectedHabit._id}`,
-    `http://localhost:3000/habits/${selectedHabit._id}`,
+    `https://callback-cats-server.herokuapp.com/habits/${selectedHabit._id}`,
+    // `http://localhost:3000/habits/${selectedHabit._id}`,
     {
       method: "PUT",
       mode: "cors",
@@ -310,5 +310,5 @@ const incrementHabit = async () => {
 const incrementBtn = document.querySelector(".increment-btn");
 incrementBtn.addEventListener("click", () => {
   incrementHabit();
-  // console.log(selectedHabit.habitType);
+  console.log(selectedHabit.habitType);
 });
